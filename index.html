@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kedai Senja – Cafe Manager Game</title>
+<meta name="description" content="Kedai Senja: a cozy pixel-cartoon cafe manager game. Serve customers, craft drinks, upgrade your kitchen and decorate your cafe.">
+<meta name="theme-color" content="#241629">
+<meta property="og:type" content="website"><meta property="og:title" content="Kedai Senja – Cafe Manager Game">
+<meta property="og:description" content="Serve customers, craft drinks and grow your little cafe under the sunset. Play free in your browser.">
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;-webkit-tap-highlight-color:transparent}
+:root{--bg:#241629;--pn:#341f3a;--pn2:#46294d;--ln:#5d3a63;--tx:#fdeedd;--mu:#c3a6bd;--am:#ffb347;--am2:#ff8a3d;--rs:#f0708a;--gr:#7fd18b;--p:0;font-family:Nunito,system-ui,sans-serif;color:var(--tx)}
+html,body{height:100%;background:#150c19}
+body{display:flex;justify-content:center}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;transition:transform .12s,filter .15s,background .2s}
+button:focus-visible{outline:3px solid var(--am);outline-offset:2px}
+h1,h2,h3,.hd{font-family:'Bricolage Grotesque',Georgia,serif}
+#app{width:100%;max-width:1040px;height:100dvh;display:flex;flex-direction:column;background:var(--bg);overflow:auto}
+#hud{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--pn);border-bottom:1px solid var(--ln);flex-wrap:wrap}
+#hud h1{font-size:1.15rem;margin-right:auto;color:var(--am);white-space:nowrap}
+.st{background:var(--bg);border:1px solid var(--ln);border-radius:20px;padding:4px 11px;font-weight:800;font-size:.9rem;white-space:nowrap}
+.st.bump{animation:bump .35s}
+.ib{width:36px;height:36px;border-radius:50%;background:var(--pn2);font-size:1rem}
+.ib:hover,.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.ib:active,.btn:active,.ing:active,.rc:active,.tr:active{transform:scale(.93)}
+#tb{height:20px;background:#150c19;position:relative;flex:none}
+#tf{height:100%;width:0;background:linear-gradient(90deg,var(--am),var(--rs));transition:width .2s linear}
+#tt{position:absolute;right:8px;top:0;font-size:.72rem;font-weight:800;line-height:20px}
+#scene{position:relative;flex:1 0 250px;overflow:hidden;background:linear-gradient(180deg,hsl(calc(285 - 30*var(--p)) 40% calc(30% - 12%*var(--p))) 0%,hsl(calc(345 - 305*(1 - var(--p))*0 - 20*var(--p)) 75% calc(62% - 22%*var(--p))) 62%,hsl(calc(38 + 0*var(--p)) 95% calc(66% - 20%*var(--p))) 100%)}
+.sun{position:absolute;left:12%;top:calc(8% + 42%*var(--p));width:84px;height:84px;border-radius:50%;background:radial-gradient(circle,#fff3c4,#ffb347 60%,#ff8a3d);box-shadow:0 0 70px 28px rgba(255,170,80,.5);transition:top .3s linear}
+#decor{position:absolute;top:10px;right:12px;display:flex;gap:10px;font-size:1.9rem;flex-wrap:wrap;justify-content:flex-end;max-width:60%}
+#decor span{animation:pop .5s cubic-bezier(.2,1.6,.4,1);filter:drop-shadow(0 3px 3px rgba(0,0,0,.3))}
+#seats{position:absolute;left:0;right:0;bottom:26px;display:flex;padding:0 10px;gap:4px}
+.seat{flex:1;min-width:0;height:170px;display:flex;justify-content:center;align-items:flex-end;position:relative}
+.seat::after{content:"🪑";position:absolute;bottom:-6px;font-size:2.1rem;opacity:.9;z-index:0}
+.counter{position:absolute;left:0;right:0;bottom:0;height:30px;background:linear-gradient(#6b3f26,#4a2a19);border-top:4px solid #8a5636;z-index:3}
+.cust{position:relative;display:flex;flex-direction:column;align-items:center;z-index:1;margin-bottom:22px;animation:in .55s cubic-bezier(.2,1.4,.4,1)}
+.bub{display:flex;gap:4px;background:#fff;color:#3a2230;border-radius:14px;padding:5px 7px;margin-bottom:6px;box-shadow:0 4px 10px rgba(0,0,0,.25);position:relative}
+.bub::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#fff}
+.chip{display:flex;flex-direction:column;align-items:center;font-size:1.35rem;line-height:1.1;padding:2px 4px;border-radius:9px;transition:.25s}
+.chip small{font-size:.58rem;font-weight:800}
+.chip.ok{background:#c8f2cc;opacity:.55;transform:scale(.85)}
+.face{font-size:2.9rem;line-height:1;position:relative}
+.mood{position:absolute;right:-12px;top:-4px;font-size:1.2rem}
+.pat{width:64px;height:7px;background:rgba(0,0,0,.4);border-radius:5px;overflow:hidden;margin-top:3px}
+.pat i{display:block;height:100%;width:100%;background:var(--gr);transition:background .3s}
+.pat i.mid{background:var(--am)}.pat i.low{background:var(--rs)}
+.out-happy{animation:happy .6s forwards}.out-sad{animation:sad .6s forwards}
+#banner{position:absolute;left:50%;top:14px;transform:translateX(-50%) scale(.8);background:var(--bg);border:2px solid var(--am);padding:7px 18px;border-radius:30px;font-weight:800;opacity:0;pointer-events:none;z-index:5;white-space:nowrap}
+#banner.on{animation:ban 2.4s}
+#bar{display:grid;grid-template-columns:210px 1fr;gap:12px;padding:12px;background:var(--pn);border-top:1px solid var(--ln);flex:none}
+@media(max-width:720px){#bar{grid-template-columns:1fr}#hud h1{font-size:1rem}.face{font-size:2.2rem}.pat{width:48px}.chip{font-size:1.05rem}.seat{height:150px}}
+h3{font-size:.95rem;margin-bottom:6px;color:var(--am)}
+#book{display:grid;gap:5px;align-content:start}
+.rc{display:flex;align-items:center;gap:7px;background:var(--bg);border:1px solid var(--ln);border-radius:12px;padding:5px 8px;text-align:left;font-size:.82rem}
+.rc:hover:not(.lk){border-color:var(--am)}
+.rc b{display:block}.rc .e{font-size:1.4rem}.rc .ii{letter-spacing:2px;font-size:.75rem;color:var(--mu)}
+.rc.lk{opacity:.45;cursor:not-allowed}
+.rc>span:last-child{margin-left:auto;font-weight:800;color:var(--gr);font-size:.78rem}
+#work{display:grid;gap:10px}
+#ingr{display:flex;gap:6px;flex-wrap:wrap}
+.ing{flex:1;min-width:56px;background:var(--bg);border:1px solid var(--ln);border-radius:14px;padding:6px 2px;font-size:1.5rem;line-height:1.1;position:relative}
+.ing small{display:block;font-size:.65rem;font-weight:800;color:var(--mu)}
+.ing:hover{border-color:var(--am);transform:translateY(-3px)}
+.ing kbd{position:absolute;top:2px;left:5px;font-size:.55rem;color:var(--mu)}
+#mix{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#cup{display:flex;gap:5px;background:var(--bg);border:2px dashed var(--ln);border-radius:16px;padding:6px;min-width:150px;justify-content:center}
+#cup span{width:38px;height:38px;border-radius:10px;background:var(--pn);display:grid;place-items:center;font-size:1.4rem}
+#cup span.f{animation:pop .3s cubic-bezier(.2,1.6,.4,1)}
+#info{flex:1;min-width:130px;font-size:.85rem;font-weight:800}
+#info small{display:block;color:var(--mu);font-weight:500}
+#pg{height:8px;background:var(--bg);border-radius:6px;overflow:hidden;margin-top:5px}#pg i{display:block;height:100%;width:0;background:var(--am)}
+.btn{background:linear-gradient(var(--am),var(--am2));color:#2a1330;font-weight:800;border-radius:14px;padding:9px 16px;box-shadow:0 3px 0 #b85a1f}
+.btn.sec{background:var(--pn2);color:var(--tx);box-shadow:0 3px 0 #2a1630}
+.btn.sm{padding:5px 12px;font-size:.85rem}.btn:disabled{filter:grayscale(1);opacity:.5;cursor:default}
+#tray{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.tr,.es{width:50px;height:50px;border-radius:14px;font-size:1.7rem;display:grid;place-items:center}
+.tr{background:linear-gradient(#fff,#ffe6c4);animation:pop .4s cubic-bezier(.2,1.6,.4,1);box-shadow:0 3px 0 #b58a5a}
+.tr:hover{transform:translateY(-4px)}.es{border:2px dashed var(--ln)}
+.shake{animation:shake .35s}
+#ov{position:fixed;inset:0;background:rgba(15,6,20,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:14px;backdrop-filter:blur(3px)}
+#ov.on{display:flex}
+.card{background:var(--pn);border:1px solid var(--ln);border-radius:22px;padding:22px;width:min(100%,440px);max-height:92dvh;overflow:auto;animation:in .4s cubic-bezier(.2,1.3,.4,1);text-align:center}
+.card.wide{width:min(100%,640px)}
+.card h2{font-size:1.7rem;color:var(--am);margin-bottom:6px}
+.card p{color:var(--mu);margin:6px 0 14px;line-height:1.5}
+.card .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px;align-items:center}
+.stat{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--ln);font-weight:700}
+.tabs{display:flex;gap:6px;justify-content:center;margin:8px 0}
+.tabs button{padding:6px 16px;border-radius:20px;background:var(--bg);font-weight:800}.tabs .on{background:var(--am);color:#2a1330}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:8px}
+.up{background:var(--bg);border:1px solid var(--ln);border-radius:16px;padding:12px 8px;display:flex;flex-direction:column;gap:4px;align-items:center}
+.up .ue{font-size:2rem}.up small{color:var(--mu);font-size:.75rem;min-height:2em}
+.pips{display:flex;gap:4px}.pips i{width:16px;height:6px;border-radius:4px;background:var(--ln)}.pips i.on{background:var(--gr)}
+#tut{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);width:min(94vw,420px);background:var(--pn);border:2px solid var(--am);border-radius:18px;padding:14px 16px;z-index:60;display:none;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+#tut.on{display:block;animation:in .35s}
+#tut p{margin:4px 0 10px;line-height:1.45}
+#tut .row{display:flex;justify-content:space-between;align-items:center;font-size:.8rem;color:var(--mu)}
+.hl{position:relative;z-index:55;border-radius:14px;box-shadow:0 0 0 4px var(--am),0 0 0 9999px rgba(15,6,20,.7)}
+#toasts{position:fixed;top:70px;left:50%;transform:translateX(-50%);z-index:70;display:grid;gap:6px;pointer-events:none}
+.ts{background:#fff;color:#3a2230;font-weight:800;padding:7px 16px;border-radius:20px;animation:ban 1.9s forwards;font-size:.9rem}
+.fl{position:fixed;font-weight:800;font-size:1.1rem;color:var(--am);text-shadow:0 2px 4px #000;pointer-events:none;z-index:65;animation:fl 1.2s forwards}
+@keyframes in{from{opacity:0;transform:translateY(24px) scale(.7)}}
+@keyframes pop{from{transform:scale(.3)}}
+@keyframes bump{50%{transform:scale(1.2);background:var(--am);color:#2a1330}}
+@keyframes happy{to{opacity:0;transform:translateY(-34px) scale(1.1)}}
+@keyframes sad{30%{transform:translateX(-8px)}60%{transform:translateX(8px)}to{opacity:0;transform:translateX(0) scale(.8)}}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+@keyframes ban{0%{opacity:0;transform:translateX(-50%) scale(.8)}12%,80%{opacity:1;transform:translateX(-50%) scale(1)}100%{opacity:0;transform:translateX(-50%) translateY(-10px)}}
+@keyframes fl{to{opacity:0;transform:translateY(-60px)}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition:none!important}}
+
+/* ===== Cartoon pixel theme ===== */
+:root{--ol:#120a16}
+h1,h2,h3,.st,.btn,.ts,#banner,.fl,.ing small,.tabs button,.stat,.chip small{font-family:'Pixelify Sans','Courier New',monospace}
+#app *,.card,.card *,#tut,#tut *,.ts{border-radius:4px}
+.st,.ib,.ing,.rc,.up,#cup,.btn,.tr,.bub,.card,#tut,.ts,#banner,.tabs button,.es{border:3px solid var(--ol)}
+.es{border-style:dashed;border-color:var(--ln)}
+.st,.ib,.ing,.rc,.up,.card,#tut{box-shadow:0 4px 0 var(--ol)}
+.btn,.btn.sec{box-shadow:0 4px 0 var(--ol),inset 0 3px 0 rgba(255,255,255,.35),inset 0 -4px 0 rgba(0,0,0,.18)}
+.btn:active,.ib:active{transform:translateY(4px);box-shadow:0 0 0 var(--ol)}
+.tr{box-shadow:0 4px 0 var(--ol),inset 0 3px 0 #fff}
+.hl{box-shadow:0 0 0 4px var(--am),0 0 0 9999px rgba(15,6,20,.7)!important}
+#hud{border-bottom:4px solid var(--ol)}#hud h1{text-shadow:0 3px 0 var(--ol);font-size:1.3rem}
+#bar{border-top:4px solid var(--ol)}
+#tb{border-block:3px solid var(--ol);height:22px}
+#tf{background:repeating-linear-gradient(90deg,var(--am) 0 8px,var(--am2) 8px 10px)}
+#scene{background:repeating-linear-gradient(90deg,#3d2346 0 38px,#37203f 38px 40px)}
+#app .win{position:absolute;left:4%;top:14px;width:44%;height:46%;min-height:110px;border:6px solid #8a5636;outline:3px solid var(--ol);overflow:hidden;box-shadow:0 4px 0 3px var(--ol);background:linear-gradient(180deg,hsl(calc(285 - 25*var(--p)) 55% calc(46% - 16%*var(--p))),hsl(calc(350 - 15*var(--p)) 85% calc(68% - 24%*var(--p))) 65%,hsl(38 95% calc(70% - 26%*var(--p))))}
+.win::before{content:"";position:absolute;inset:0;z-index:4;background:linear-gradient(#8a5636,#8a5636) center/6px 100% no-repeat,linear-gradient(#8a5636,#8a5636) center/100% 6px no-repeat}
+.win::after{content:"";position:absolute;inset:0;opacity:calc(var(--p)*1.4 - .3);background:radial-gradient(2px 2px at 20% 18%,#fff,transparent),radial-gradient(2px 2px at 72% 12%,#fff,transparent),radial-gradient(2px 2px at 45% 30%,#fff,transparent),radial-gradient(2px 2px at 88% 34%,#fff,transparent)}
+#app .sun{left:52%;top:calc(6% + 52%*var(--p));width:52px;height:52px;background:#ffd36b;box-shadow:none;border-radius:0;z-index:1;clip-path:polygon(30% 0,70% 0,70% 10%,90% 10%,90% 30%,100% 30%,100% 70%,90% 70%,90% 90%,70% 90%,70% 100%,30% 100%,30% 90%,10% 90%,10% 70%,0 70%,0 30%,10% 30%,10% 10%,30% 10%)}
+#app .cl{position:absolute;top:18%;left:0;width:10px;height:10px;border-radius:0;background:#fff;opacity:.85;z-index:2;box-shadow:10px 0 #fff,20px 0 #fff,30px 0 #fff,40px 0 #fff,10px -10px #fff,20px -10px #fff;animation:drift 50s linear infinite}
+#app .cl.b{top:40%;animation-duration:75s;animation-delay:-30s;opacity:.6}
+@keyframes drift{from{margin-left:-60px}to{margin-left:480px}}
+#app .sky{position:absolute;left:0;right:0;bottom:0;height:38%;z-index:3;background:#2a1634;border-radius:0;clip-path:polygon(0 100%,0 40%,8% 40%,8% 20%,16% 20%,16% 50%,24% 50%,24% 8%,30% 8%,30% 60%,40% 60%,40% 30%,50% 30%,50% 55%,60% 55%,60% 15%,68% 15%,68% 45%,78% 45%,78% 25%,88% 25%,88% 50%,100% 50%,100% 100%)}
+#app .floor{position:absolute;left:0;right:0;bottom:0;height:78px;border-top:4px solid var(--ol);background:repeating-linear-gradient(90deg,#8a5a37 0 46px,#764a2c 46px 48px)}
+.counter{border-top:4px solid var(--ol);background:repeating-linear-gradient(90deg,#6b3f26 0 30px,#5c3720 30px 32px)}
+#decor{top:14px;right:3%;padding:6px 10px 0;border-bottom:8px solid #8a5636;box-shadow:0 3px 0 var(--ol);max-width:42%;font-size:1.7rem}
+.face{width:64px;height:70px;font-size:0}
+.face img{width:100%;height:100%;image-rendering:pixelated;filter:drop-shadow(0 3px 0 rgba(0,0,0,.35))}
+.mood{font-size:1rem;right:-16px;top:-8px;background:#fff;border:2px solid var(--ol);padding:0 2px;line-height:1.25}
+.pat{height:11px;border:2px solid var(--ol);background:#120a16}
+.pat i{background-image:repeating-linear-gradient(90deg,transparent 0 5px,rgba(0,0,0,.28) 5px 6px);transition:none}
+.bub{box-shadow:0 3px 0 var(--ol)}
+.bub::after{bottom:-9px}
+.chip.ok{background:#9be8a5}
+#cup span{border-radius:2px}
+.card h2{text-shadow:0 3px 0 var(--ol)}
+@media(max-width:720px){.face{width:48px;height:54px}#app .win{width:50%}}
+.crown{position:absolute;left:50%;top:-16px;transform:translateX(-50%);font-size:1.1rem;animation:pop .4s}
+.vip .bub{background:#ffe9a8;box-shadow:0 3px 0 #b8860b}
+#tt{color:#fff;text-shadow:0 2px 0 var(--ol)}
+</style>
+</head>
+<body>
+<noscript>Please enable JavaScript to play Kedai Senja.</noscript>
+<div id="app">
+  <header id="hud">
+    <h1>☕ Kedai Senja</h1>
+    <span class="st" id="sMoney"></span><span class="st" id="sDay"></span><span class="st" id="sRate"></span><span class="st" id="sCombo"></span>
+    <button class="ib" id="bShop" title="Toko upgrade" onclick="openShop(closeModal)">🛒</button>
+    <button class="ib" title="Peringkat & cloud save" onclick="openLB(closeModal)">🏆</button>
+    <button class="ib" title="Cara bermain" onclick="tutStart()">❓</button>
+    <button class="ib" id="bMenu" title="Menu (Esc)" onclick="menu()">⚙️</button>
+  </header>
+  <div id="tb"><div id="tf"></div><span id="tt"></span></div>
+  <section id="scene">
+    <div class="win"><div class="sun"></div><i class="cl"></i><i class="cl b"></i><div class="sky"></div></div><div id="decor"></div><div id="banner"></div><div class="floor"></div>
+    <div id="seats"></div><div class="counter"></div>
+  </section>
+  <section id="bar">
+    <div><h3>📖 Buku Resep <small style="color:var(--mu);font-weight:500">(tap untuk isi cangkir)</small></h3><div id="book"></div></div>
+    <div id="work">
+      <div><h3>1 · Pilih bahan</h3><div id="ingr"></div></div>
+      <div><h3>2 · Racik</h3>
+        <div id="mix"><div id="cup"></div>
+          <div id="info"></div>
+          <button class="btn" id="bBrew" onclick="brew()">Racik!</button>
+          <button class="btn sec" onclick="clearCup()" title="Kosongkan cangkir">🗑️</button>
+        </div><div id="pg"><i></i></div>
+      </div>
+      <div><h3>3 · Sajikan <small style="color:var(--mu);font-weight:500">(tap minuman siap saji)</small></h3><div id="tray"></div></div>
+    </div>
+  </section>
+</div>
+<div id="ov"></div><div id="tut"></div><div id="toasts"></div>
+
+<script src="config.js"></script>
+<script>
+const $=s=>document.querySelector(s),rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];
+const KEY='kedaiSenjaSave',DAY=75;
+let S={money:40,day:1,rating:3,up:{},seen:false,mute:false,total:0,best:0,name:'Barista'+Math.floor(100+Math.random()*900)};
+try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+if(!S.pid||!S.sec){const h=Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');S.pid=h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);S.sec=h.slice(32);save()}
+const fmt=n=>'Rp'+(n*1000).toLocaleString('id-ID');
+const ING={kopi:['🫘','Kopi'],teh:['🍃','Teh'],susu:['🥛','Susu'],gula:['🧂','Gula'],es:['🧊','Es'],coklat:['🍫','Cokelat'],roti:['🍞','Roti']};
+const R={
+ kopi:{n:'Kopi Hitam',e:'☕',i:['kopi'],p:12},
+ kopisusu:{n:'Kopi Susu',e:'🥤',i:['kopi','susu'],p:18},
+ teh:{n:'Teh Manis',e:'🍵',i:['teh','gula'],p:14},
+ eskopi:{n:'Es Kopi Susu',e:'🧋',i:['kopi','susu','es'],p:28,u:'r_es'},
+ coklat:{n:'Cokelat Panas',e:'🍫',i:['susu','coklat'],p:24,u:'r_coklat'},
+ roti:{n:'Roti Bakar',e:'🍞',i:['roti'],p:16,u:'r_roti'}};
+const UP=[
+ {id:'mesin',c:'dapur',n:'Mesin Espresso',e:'⚙️',d:'Meracik lebih cepat',cost:[80,170,300]},
+ {id:'rak',c:'dapur',n:'Rak Saji',e:'🧺',d:'+1 slot minuman siap',cost:[60,130,230]},
+ {id:'kursi',c:'dapur',n:'Kursi Tambahan',e:'🪑',d:'+1 kursi pelanggan',cost:[100,220]},
+ {id:'r_es',c:'dapur',n:'Resep Es Kopi Susu',e:'🧋',d:'Kopi + Susu + Es · Rp28k',cost:[120]},
+ {id:'r_coklat',c:'dapur',n:'Resep Cokelat Panas',e:'🍫',d:'Susu + Cokelat · Rp24k',cost:[150]},
+ {id:'r_roti',c:'dapur',n:'Pemanggang Roti',e:'🍞',d:'Roti Bakar · Rp16k',cost:[110]},
+ {id:'d1',c:'dekor',n:'Tanaman Hias',e:'🪴',d:'+7% kesabaran & tip',cost:[60]},
+ {id:'d2',c:'dekor',n:'Lampu Gantung',e:'💡',d:'+7% kesabaran & tip',cost:[90]},
+ {id:'d3',c:'dekor',n:'Poster Vintage',e:'🖼️',d:'+7% kesabaran & tip',cost:[120]},
+ {id:'d4',c:'dekor',n:'Akuarium',e:'🐠',d:'+7% kesabaran & tip',cost:[190]},
+ {id:'d5',c:'dekor',n:'Piano Kecil',e:'🎹',d:'+7% kesabaran & tip',cost:[320]},
+ {id:'d6',c:'dekor',n:'Kucing Kafe',e:'🐈',d:'+7% kesabaran & tip',cost:[250]}];
+const lvl=id=>S.up[id]||0,unlocked=k=>!R[k].u||lvl(R[k].u);
+const seats=()=>3+lvl('kursi'),slots=()=>2+lvl('rak'),brewT=()=>[3,2.3,1.7,1.1][lvl('mesin')];
+const charm=()=>UP.filter(u=>u.c==='dekor'&&lvl(u.id)).length;
+const FACES=['🧑','👩','👨','🧓','👧','🧔','👩‍🦱','🧑‍🎤','👴','👩‍💻'];
+const newG=()=>({run:false,t:0,cs:[],tray:[],cup:[],brew:null,earned:0,served:0,missed:0,combo:0,spawn:1,id:1,rush:false,closed:false,over:false});
+let G=newG(),ovOpen=false,tutOn=false,back=null;
+
+/* ---------- audio ---------- */
+let AC;function snd(f=440,d=.09,t='sine',v=.05){if(S.mute)return;try{AC=AC||new AudioContext();const o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.value=f;g.gain.value=v;g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
+const chime=()=>{snd(880,.12,'triangle');setTimeout(()=>snd(1320,.2,'triangle'),90)};
+function toggleSnd(){S.mute=!S.mute;save();music();hud()}
+
+/* ---------- ui helpers ---------- */
+function toast(t){const d=document.createElement('div');d.className='ts';d.textContent=t;$('#toasts').appendChild(d);setTimeout(()=>d.remove(),1900)}
+function fx(el,t){const r=el.getBoundingClientRect(),d=document.createElement('div');d.className='fl';d.textContent=t;d.style.left=(r.left+r.width/2-30)+'px';d.style.top=r.top+'px';document.body.appendChild(d);setTimeout(()=>d.remove(),1200)}
+function banner(t){const b=$('#banner');b.textContent=t;b.classList.remove('on');void b.offsetWidth;b.classList.add('on')}
+function shake(el){el.classList.remove('shake');void el.offsetWidth;el.classList.add('shake')}
+function modal(h,c=''){$('#ov').innerHTML=`<div class="card ${c}">${h}</div>`;$('#ov').classList.add('on');ovOpen=true}
+function closeModal(){$('#ov').classList.remove('on');ovOpen=false}
+function bump(id){const e=$(id);e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')}
+let lastMoney=null;
+function hud(){const m=$('#sMoney');m.textContent='💰 '+fmt(S.money);if(lastMoney!==null&&lastMoney!==S.money)bump('#sMoney');lastMoney=S.money;
+ $('#sDay').textContent='📅 Hari '+S.day;$('#sRate').textContent='⭐ '+S.rating.toFixed(1);
+ const c=$('#sCombo');c.textContent='🔥 x'+G.combo;c.style.opacity=G.combo>1?1:.45}
+
+/* ---------- bar: ingredients, book, cup, tray ---------- */
+const ikeys=Object.keys(ING);
+function renderIngr(){$('#ingr').innerHTML=ikeys.map((k,i)=>`<button class="ing" onclick="addIng('${k}')" aria-label="${ING[k][1]}"><kbd>${i+1}</kbd>${ING[k][0]}<small>${ING[k][1]}</small></button>`).join('')}
+function renderBook(){$('#book').innerHTML=Object.keys(R).map(k=>{const r=R[k],ok=unlocked(k);return `<button class="rc ${ok?'':'lk'}" ${ok?`onclick="fillCup('${k}')"`:'onclick="toast(\'Beli resep ini di Toko 🛒\')"'}><span class="e">${ok?r.e:'🔒'}</span><span><b>${r.n}</b><span class="ii">${r.i.map(x=>ING[x][0]).join('+')}</span></span><span>${fmt(r.p)}</span></button>`}).join('')}
+const match=c=>Object.keys(R).find(k=>unlocked(k)&&R[k].i.length===c.length&&[...R[k].i].sort().join()===[...c].sort().join());
+function renderCup(){const c=G.cup;$('#cup').innerHTML=[0,1,2].map(i=>`<span class="${i===c.length-1?'f':''}">${c[i]?ING[c[i]][0]:''}</span>`).join('');
+ const m=match(c);$('#info').innerHTML=!c.length?'Cangkir kosong<small>Pilih bahan di atas</small>':m?`${R[m].e} ${R[m].n}<small>Resep benar! Tekan Racik</small>`:`Belum cocok resep<small>Cek buku resep</small>`;
+ $('#bBrew').disabled=!!G.brew}
+function renderTray(){const n=slots();$('#tray').innerHTML=Array.from({length:n},(_,i)=>G.tray[i]?`<button class="tr" onclick="serve(${i},this)" title="${R[G.tray[i]].n}">${R[G.tray[i]].e}</button>`:`<div class="es"></div>`).join('')+(G.brew?`<span style="color:var(--mu);font-size:.8rem">⏳ ${R[G.brew.k].n}…</span>`:'')}
+function renderBar(){renderBook();renderCup();renderTray();renderDecor();syncSeats()}
+function renderDecor(){$('#decor').innerHTML=UP.filter(u=>u.c==='dekor'&&lvl(u.id)).map(u=>`<span title="${u.n}">${u.e}</span>`).join('')}
+function syncSeats(){const s=$('#seats');while(s.children.length<seats()){const d=document.createElement('div');d.className='seat';s.appendChild(d)}}
+function addIng(k){if(G.brew)return toast('Tunggu racikan selesai ⏳');if(G.cup.length>=3){shake($('#cup'));return toast('Cangkir penuh (maks. 3)')}G.cup.push(k);snd(500+G.cup.length*120,.07);renderCup()}
+function fillCup(k){if(G.brew)return toast('Tunggu racikan selesai ⏳');G.cup=[...R[k].i];snd(640,.08);renderCup()}
+function clearCup(){if(G.brew)return;G.cup=[];snd(300,.08);renderCup()}
+
+/* ---------- brewing & serving ---------- */
+function brew(){if(G.brew||!G.run)return toast(G.run?'Sedang meracik…':'Mulai hari dulu ☀️');
+ if(!G.cup.length)return toast('Pilih bahan dulu 🫘');
+ if(G.tray.length>=slots())return toast('Rak saji penuh — sajikan dulu!');
+ const m=match(G.cup);if(!m){shake($('#cup'));snd(180,.2,'sawtooth');G.cup=[];renderCup();return toast('Racikan salah, bahan terbuang 😬')}
+ G.brew={k:m,t:0};G.cup=[];snd(300,.15,'triangle');renderCup();renderTray()}
+function serve(i,btn){const k=G.tray[i];const c=G.cs.filter(c=>c.need.includes(k)&&!c.done.includes(k)).sort((a,b)=>a.pat-b.pat)[0];
+ if(!c){shake(btn);snd(200,.12,'square');return toast('Tidak ada yang memesan itu')}
+ G.tray.splice(i,1);c.done.push(k);snd(660,.1,'triangle');renderTray();
+ c.el.querySelector(`[data-k=${k}]`).classList.add('ok');
+ if(c.done.length===c.need.length)pay(c)}
+function pay(c){const base=c.need.reduce((s,k)=>s+R[k].p,0)*(c.vip?2:1),r=Math.max(0,c.pat/c.max);
+ G.combo++;S.served=(S.served||0)+1;S.maxCombo=Math.max(S.maxCombo||0,G.combo);if(c.vip)S.vip=(S.vip||0)+1;const tip=Math.round(base*.25*r)+charm()*2,bonus=G.combo>2?Math.min(G.combo-2,5)*3:0,tot=base+tip+bonus;
+ S.money+=tot;S.total+=tot;G.earned+=tot;G.served++;S.rating=Math.min(5,S.rating+(r>.5?.1:.04));
+ fx(c.el,'+'+fmt(tot)+(bonus?' 🔥':''));chime();c.el.querySelector('.mood').textContent='😋';leave(c,true);hud();checkAch()}
+function leave(c,ok){G.cs=G.cs.filter(x=>x!==c);c.el.classList.add(ok?'out-happy':'out-sad');setTimeout(()=>c.el.remove(),600)}
+
+/* ---------- customers ---------- */
+function sprite(){
+ const sk=pick(['#ffd7b5','#f0b88f','#c98c60','#8d5a3a']),hr=pick(['#2b1b12','#6b3f26','#d9a441','#c2415a','#3b5bdb','#ececec']),v=Math.floor(rnd(0,3));
+ const pal={H:hr,S:sk,E:'#1b1020',M:'#b5504a',B:`hsl(${Math.floor(rnd(0,360))} 65% 55%)`,C:`hsl(${Math.floor(rnd(0,360))} 70% 45%)`};
+ const rows=['..HHHHHH..','.HHHHHHHH.','.HSSSSSSH.','.HSESSESH.','.SSSSSSSS.','..SSMMSS..','...SSSS...','.BBBBBBBB.','BBBBBBBBBB','BBBBBBBBBB','BBBBBBBBBB'].map((r,y)=>{
+  if(v===1&&y>=3&&y<=5)r='H'+r.slice(1,-1)+'H';
+  if(v===2&&y<=2)r=['..CCCCCC..','.CCCCCCCC.','CCCCCCCCCC'][y];return r});
+ let o='';rows.forEach((row,y)=>{let x=0;while(x<10){const ch=row[x];if(ch==='.'){x++;continue}let n=1;while(row[x+n]===ch)n++;o+=`<rect x="${x}" y="${y}" width="${n}" height="1" fill="${pal[ch]}"/>`;x+=n}});
+ return 'data:image/svg+xml,'+encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 11" shape-rendering="crispEdges">${o}</svg>`)}
+function spawn(){const free=[...Array(seats()).keys()].filter(i=>!G.cs.some(c=>c.seat===i));if(!free.length)return;
+ const un=Object.keys(R).filter(unlocked),n=Math.random()<Math.min(.6,.12+S.day*.07)?2:1,need=[];
+ while(need.length<n)need.push(...[pick(un)].filter(k=>!need.includes(k)));
+ const vip=S.day>=2&&Math.random()<.12,max=(n===2?44:30)*(1+.07*charm())*Math.max(.7,1-S.day*.02)*(vip?.75:1),seat=pick(free),el=document.createElement('div');
+ el.className='cust'+(vip?' vip':'');el.innerHTML=`<div class="bub">${need.map(k=>`<span class="chip" data-k="${k}"><span>${R[k].e}</span><small>${R[k].n.split(' ').pop()}</small></span>`).join('')}</div><div class="face"><img alt="" src="${sprite()}"><span class="mood">😊</span>${vip?'<span class="crown">👑</span>':''}</div><div class="pat"><i></i></div>`;
+ $('#seats').children[seat].appendChild(el);snd(520,.08,'sine');
+ if(vip)toast('👑 Pelanggan VIP! Bayar 2x lipat');G.cs.push({id:G.id++,seat,vip,need,done:[],pat:max,max,el,m:'😊',bar:el.querySelector('.pat i'),mo:el.querySelector('.mood')})}
+const interval=()=>Math.max(2.6,7-S.day*.5-(S.rating-3)*.5)*rnd(.7,1.3)*(G.rush?.55:1);
+
+/* ---------- main loop ---------- */
+let last=0;
+function loop(ts){const dt=Math.min(.1,(ts-last)/1000||0);last=ts;if(G.run&&!ovOpen&&!tutOn)tick(dt);requestAnimationFrame(loop)}
+function tick(dt){G.t+=dt;const p=Math.min(1,G.t/DAY);$('#scene').style.setProperty('--p',p);$('#tf').style.width=p*100+'%';$('#tt').textContent=(G.t<DAY?Math.ceil(DAY-G.t)+'s':'Tutup')+' · 🎯 '+fmt(G.earned)+' / '+fmt(G.goal);
+ const rush=G.t>DAY*.35&&G.t<DAY*.55;if(rush!==G.rush){G.rush=rush;if(rush)banner('🔥 Jam sibuk! Pelanggan makin banyak')}
+ if(G.t>=DAY&&!G.closed){G.closed=true;banner('🌇 Kedai tutup — layani pelanggan terakhir')}
+ if(G.t<DAY){G.spawn-=dt;if(G.spawn<=0){spawn();G.spawn=interval()}}
+ for(const c of [...G.cs]){c.pat-=dt;const r=c.pat/c.max;c.bar.style.width=Math.max(0,r*100)+'%';c.bar.className=r>.55?'':r>.28?'mid':'low';
+  const m=r>.55?'😊':r>.28?'😐':'😠';if(m!==c.m){c.m=m;c.mo.textContent=m}
+  if(c.pat<=0){c.mo.textContent='😡';G.combo=0;G.missed++;S.rating=Math.max(1,S.rating-.3);leave(c,false);snd(160,.25,'sawtooth');toast('Pelanggan pergi kecewa 💢');hud()}}
+ if(G.brew){G.brew.t+=dt;$('#pg i').style.width=Math.min(100,G.brew.t/brewT()*100)+'%';
+  if(G.brew.t>=brewT()){G.tray.push(G.brew.k);G.brew=null;$('#pg i').style.width='0';snd(780,.12,'triangle');renderTray();renderCup()}}
+ if(G.closed&&!G.cs.length&&!G.over){G.over=true;endDay()}}
+
+/* ---------- day flow ---------- */
+function startDay(){closeModal();document.querySelectorAll('.cust').forEach(e=>e.remove());G=newG();G.goal=100+S.day*30;G.run=true;music();$('#scene').style.setProperty('--p',0);renderBar();hud();banner('☀️ Hari '+S.day+' dimulai!');snd(520,.1);setTimeout(()=>snd(780,.15),100)}
+function endDay(){G.run=false;const d=S.day;S.day++;S.rating=Math.max(1,S.rating);S.best=Math.max(S.best||0,G.earned);const hit=G.earned>=G.goal;if(hit)S.money+=40;if(!G.missed&&G.served>=8)S.perfect=true;checkAch();save();hud();cloudPush();
+ const stars='⭐'.repeat(Math.round(S.rating))+'☆'.repeat(5-Math.round(S.rating));
+ const tip=G.missed>G.served?'Terlalu banyak pelanggan kabur. Upgrade mesin & rak saji!':G.missed===0?'Sempurna! Tidak ada pelanggan kecewa 🎉':'Bagus! Coba jaga kombo biar bonusnya besar.';
+ const v=()=>modal(`<h2>Hari ${d} selesai 🌙</h2><div class="stat"><span>Pendapatan</span><span>${fmt(G.earned)}</span></div><div class="stat"><span>Pelanggan dilayani</span><span>${G.served}</span></div><div class="stat"><span>Pelanggan kecewa</span><span>${G.missed}</span></div><div class="stat"><span>Target harian ${fmt(G.goal)}</span><span>${hit?'✅ +Rp40.000':'❌ belum'}</span></div><div class="stat"><span>Rating kafe</span><span>${stars}</span></div><p>${tip}</p><div class="row"><button class="btn sec" onclick="openShop(sum)">🛒 Toko</button><button class="btn sec" onclick="openLB(sum)">🏆 Peringkat</button><button class="btn" onclick="startDay()">Mulai Hari ${S.day}</button></div>`);
+ window.sum=v;v()}
+function showStart(){back=showStart;const first=S.day===1&&S.money===40;
+ modal(`<h2>☕ Kedai Senja</h2><p>Layani pelanggan, racik pesanan, dan kembangkan kafe kecilmu di bawah langit senja.</p><div class="row"><button class="btn" onclick="startDay()">${first?'Mulai Hari 1':'Lanjut Hari '+S.day}</button></div><div class="row"><button class="btn sec sm" onclick="tutStart()">❓ Cara bermain</button><button class="btn sec sm" onclick="openShop(showStart)">🛒 Toko</button>${first?'':'<button class="btn sec sm" onclick="resetAll()">↺ Mulai ulang</button>'}</div>`)}
+function resetAll(){if(confirm('Hapus semua progres dan mulai dari awal?')){localStorage.removeItem(KEY);location.reload()}}
+
+/* ---------- shop ---------- */
+let tab='dapur';
+function openShop(b,t){back=b||closeModal;tab=t||tab;
+ modal(`<h2>🛒 Toko Upgrade</h2><div class="tabs"><button class="${tab==='dapur'?'on':''}" onclick="openShop(back,'dapur')">🍳 Dapur</button><button class="${tab==='dekor'?'on':''}" onclick="openShop(back,'dekor')">🌿 Dekorasi</button></div>
+ <div class="grid">${UP.filter(u=>u.c===tab).map(u=>{const l=lvl(u.id),done=l>=u.cost.length;return `<div class="up"><div class="ue">${u.e}</div><b>${u.n}</b><small>${u.d}</small><div class="pips">${u.cost.map((_,i)=>`<i class="${i<l?'on':''}"></i>`).join('')}</div><button class="btn sm" ${done?'disabled':''} onclick="buy('${u.id}')">${done?'Maksimal ✓':fmt(u.cost[l])}</button></div>`}).join('')}</div>
+ <div class="row"><span class="st">💰 ${fmt(S.money)}</span><button class="btn" onclick="back()">Kembali</button></div>`,'wide')}
+function buy(id){const u=UP.find(x=>x.id===id),l=lvl(id),c=u.cost[l];if(S.money<c){snd(180,.2,'square');return toast('Uang belum cukup 😅')}
+ S.money-=c;S.up[id]=l+1;save();chime();hud();renderBar();checkAch();openShop(back);toast(u.e+' '+u.n+' terpasang!')}
+
+/* ---------- tutorial ---------- */
+const STEPS=[
+ ['#scene','Selamat datang di Kedai Senja! Pelanggan akan duduk di kursi dan memesan lewat gelembung ucapan. Perhatikan bar kesabaran di bawahnya — kalau habis, mereka pergi.'],
+ ['#book','Buku Resep: tiap minuman punya bahan tertentu. Tap sebuah resep untuk langsung mengisi cangkir.'],
+ ['#ingr','Atau racik manual: tap bahan satu per satu (maks. 3). Shortcut keyboard: angka 1–7.'],
+ ['#mix','Kalau resepnya benar, namanya muncul di sini. Tekan Racik! (atau Enter) dan tunggu progress bar penuh. Salah resep? Tekan 🗑️.'],
+ ['#tray','Minuman jadi muncul di Rak Saji. Tap minuman — otomatis diberikan ke pelanggan yang memesannya. Yang paling sabar-hampir-habis dilayani duluan.'],
+ ['#tb','Bar waktu menunjukkan sisa hari dan 🎯 target pendapatan harian — capai untuk bonus Rp40.000. Pelanggan 👑 VIP membayar 2x lipat tapi kurang sabar.'],
+ ['#hud','Layani cepat untuk tip & kombo 🔥. Rating ⭐ yang tinggi mengundang lebih banyak pelanggan, tetapi pelanggan kecewa menurunkannya.'],
+ ['#bShop','Setelah hari berakhir, belanja di Toko: mesin lebih cepat, rak lebih besar, resep baru, dan dekorasi yang menambah kesabaran & tip. Selamat berjualan!']];
+let ti=0;
+function tutStart(){closeModal();tutOn=true;ti=0;tutShow()}
+function tutShow(){document.querySelectorAll('.hl').forEach(e=>e.classList.remove('hl'));
+ if(ti>=STEPS.length)return tutEnd();const[s,t]=STEPS[ti],el=$(s);el.classList.add('hl');el.scrollIntoView({behavior:'smooth',block:'center'});
+ const T=$('#tut');T.classList.remove('on');void T.offsetWidth;T.classList.add('on');
+ T.innerHTML=`<p>${t}</p><div class="row"><span>${ti+1} / ${STEPS.length}</span><span><button class="btn sec sm" onclick="tutEnd()">Lewati</button> <button class="btn sm" onclick="ti++;tutShow()">${ti===STEPS.length-1?'Selesai ✓':'Lanjut'}</button></span></div>`}
+function tutEnd(){document.querySelectorAll('.hl').forEach(e=>e.classList.remove('hl'));$('#tut').classList.remove('on');tutOn=false;S.seen=true;save();if(!G.run)showStart();else closeModal()}
+
+/* ---------- keyboard ---------- */
+addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&!tutOn){ovOpen?closeModal():menu();return}if(ovOpen||tutOn||!G.run)return;const n=+e.key;
+ if(n>=1&&n<=ikeys.length)addIng(ikeys[n-1]);else if(e.key==='Enter'||e.key===' '){e.preventDefault();brew()}else if(e.key==='Backspace')clearCup()});
+
+/* ---------- leaderboard: Supabase REST, no login ---------- */
+const CFG=window.KEDAI_CONFIG||{},CLOUD=!!(CFG.url&&CFG.anonKey&&!/YOUR-/.test(CFG.url+CFG.anonKey));
+let cloudMsg=CLOUD?'🌐 Papan peringkat aktif':'Mode offline — isi config.js untuk mengaktifkan papan peringkat';
+const esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function raw(path,o={}){const r=await fetch(CFG.url+path,{...o,headers:{apikey:CFG.anonKey,'Content-Type':'application/json',...o.headers}});if(!r.ok)throw new Error(r.status);const t=await r.text();return t?JSON.parse(t):null}
+async function cloudPush(){if(!CLOUD)return;try{await raw('/rest/v1/rpc/submit_score',{method:'POST',body:JSON.stringify({p_id:S.pid,p_secret:S.sec,p_name:(S.name||'Barista').slice(0,16),p_total:S.total,p_best:S.best||0,p_day:S.day})});cloudMsg='✅ Skor terkirim'}catch(e){cloudMsg='⚠️ Gagal mengirim skor ('+e.message+')'}}
+function openLB(b){back=b||closeModal;
+ modal(`<h2>🏆 Peringkat Barista</h2><p id="cm">${cloudMsg}</p><div class="row" style="margin:0 0 10px"><input id="nm" maxlength="16" value="${esc(S.name)}" aria-label="Nama" style="background:var(--bg);color:var(--tx);border:3px solid var(--ol);border-radius:4px;padding:8px 12px;font:inherit;width:170px"><button class="btn sm" onclick="saveName()">Simpan nama</button></div><div id="lb">${CLOUD?'Memuat…':'<p>Papan peringkat butuh backend Supabase (lihat README). Progres tetap tersimpan di perangkat ini.</p>'}</div><div class="row"><button class="btn" onclick="back()">Kembali</button></div>`);
+ if(CLOUD)loadLB()}
+async function loadLB(){try{const r=await raw('/rest/v1/scores?select=id,name,total_earned,day&order=total_earned.desc&limit=10'),el=$('#lb');if(!el)return;
+ el.innerHTML=r.length?r.map((x,i)=>`<div class="stat" style="${x.id===S.pid?'color:var(--am)':''}"><span>${['🥇','🥈','🥉'][i]||i+1+'.'} ${esc(x.name)} <small style="color:var(--mu)">· Hari ${x.day}</small></span><span>${fmt(x.total_earned)}</span></div>`).join(''):'<p>Belum ada skor. Selesaikan satu hari untuk masuk papan!</p>'}
+ catch(e){const el=$('#lb');if(el)el.innerHTML='<p>Gagal memuat peringkat. Periksa config.js & schema.sql.</p>'}}
+async function saveName(){const v=$('#nm').value.trim().slice(0,16);if(!v)return toast('Nama tidak boleh kosong');S.name=v;save();chime();if(CLOUD){await cloudPush();$('#cm').textContent=cloudMsg;loadLB()}}
+
+/* ---------- menu, music, achievements, save code ---------- */
+let mi=null,ms=0;const NT=[261.6,329.6,392,523.3,392,329.6,293.7,349.2,440,587.3,440,349.2];
+function music(){clearInterval(mi);mi=null;if(S.mute||S.nomusic)return;mi=setInterval(()=>{if(ovOpen||tutOn||!G.run)return;snd(NT[ms++%NT.length]/2,.25,'square',.012);if(ms%4===0)snd(NT[0]/4,.3,'triangle',.02)},260)}
+function menu(){modal(`<h2>⚙️ Menu</h2><div class="row" style="flex-direction:column;align-items:stretch"><button class="btn" onclick="closeModal()">▶ Lanjutkan</button><button class="btn sec" onclick="toggleSnd();menu()">${S.mute?'🔇 Suara: mati':'🔊 Suara: nyala'}</button><button class="btn sec" onclick="S.nomusic=!S.nomusic;save();music();menu()">🎵 Musik: ${S.nomusic?'mati':'nyala'}</button><button class="btn sec" onclick="openAch()">🏅 Pencapaian</button><button class="btn sec" onclick="exportSave()">💾 Simpan / muat kode</button><button class="btn sec" onclick="tutStart()">❓ Cara bermain</button><button class="btn sec" onclick="resetAll()">↺ Mulai ulang</button></div>`)}
+const ACH=[['first','Pelanggan Pertama','🥤','Layani 1 pelanggan',()=>S.served>=1],['s50','Pelayan Handal','🧑‍🍳','Layani 50 pelanggan',()=>S.served>=50],['s200','Legenda Kedai','🏆','Layani 200 pelanggan',()=>S.served>=200],['c5','Kombo 5x','🔥','Capai kombo 5x',()=>S.maxCombo>=5],['c10','Kombo 10x','⚡','Capai kombo 10x',()=>S.maxCombo>=10],['rich','Juragan','💰','Total pendapatan Rp1.000.000',()=>S.total>=1000],['star','Bintang Lima','⭐','Rating 4,5 atau lebih',()=>S.rating>=4.5],['d5','Bertahan 5 Hari','📅','Selesaikan 5 hari',()=>S.day>=6],['d10','Veteran','🌇','Selesaikan 10 hari',()=>S.day>=11],['perfect','Hari Sempurna','✨','Tanpa pelanggan kecewa (min. 8 dilayani)',()=>S.perfect],['vip','Sahabat VIP','👑','Layani 5 pelanggan VIP',()=>S.vip>=5],['chef','Chef Lengkap','📖','Buka semua resep',()=>Object.keys(R).every(unlocked)],['deco','Kafe Impian','🌿','Pasang semua dekorasi',()=>charm()>=6]];
+function checkAch(){S.ach=S.ach||{};for(const a of ACH)if(!S.ach[a[0]]&&a[4]()){S.ach[a[0]]=1;save();toast('🏅 '+a[1]+'!');setTimeout(chime,200)}}
+function openAch(){S.ach=S.ach||{};const n=ACH.filter(a=>S.ach[a[0]]).length;modal(`<h2>🏅 Pencapaian</h2><p>${n} / ${ACH.length} terbuka</p><div class="grid">${ACH.map(a=>`<div class="up" style="${S.ach[a[0]]?'':'opacity:.4;filter:grayscale(1)'}"><div class="ue">${a[2]}</div><b>${a[1]}</b><small>${a[3]}</small></div>`).join('')}</div><div class="row"><button class="btn" onclick="menu()">Kembali</button></div>`,'wide')}
+function exportSave(){const c=btoa(unescape(encodeURIComponent(JSON.stringify(S))));modal(`<h2>💾 Simpan / Muat</h2><p>Salin kode ini untuk memindahkan progres ke perangkat lain, atau tempel kode lalu tekan Muat.</p><textarea id="sv" rows="5" style="width:100%;background:var(--bg);color:var(--tx);border:3px solid var(--ol);padding:8px;font:.75rem monospace">${c}</textarea><div class="row"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText($('#sv').value);toast('Disalin 📋')">Salin</button><button class="btn sm" onclick="importSave()">Muat kode</button><button class="btn sec sm" onclick="menu()">Kembali</button></div>`)}
+function importSave(){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#sv').value.trim()))));if(typeof o.day!=='number'||typeof o.money!=='number')throw 0;Object.assign(S,o);save();location.reload()}catch(e){toast('Kode tidak valid ❌')}}
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&G.run&&!ovOpen&&!tutOn)menu()});
+if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+
+/* ---------- init ---------- */
+renderIngr();renderBar();hud();requestAnimationFrame(loop);
+if(!S.seen)tutStart();else showStart();
+</script>
+</body>
+</html>
