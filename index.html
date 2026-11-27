@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#241629">
 <meta property="og:type" content="website"><meta property="og:title" content="Kedai Senja – Cafe Manager Game">
 <meta property="og:description" content="Serve customers, craft drinks and grow your little cafe under the sunset. Play free in your browser.">
-<meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/og.png"><meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://farelbayone.github.io/kedai-senja/og.png"><meta name="twitter:card" content="summary_large_image">
 <link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,7 @@ html,body{height:100%;background:#150c19}
 body{display:flex;justify-content:center}
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;transition:transform .12s,filter .15s,background .2s}
 button:focus-visible{outline:3px solid var(--am);outline-offset:2px}
-h1,h2,h3,.hd{font-family:'Bricolage Grotesque',Georgia,serif}
+h1,h2,h3,.hd{font-family:'Pixelify Sans',Georgia,serif}
 #app{width:100%;max-width:1040px;height:100dvh;display:flex;flex-direction:column;background:var(--bg);overflow:auto}
 #hud{display:flex;align-items:center;gap:8px;padding:8px 12px;background:var(--pn);border-bottom:1px solid var(--ln);flex-wrap:wrap}
 #hud h1{font-size:1.15rem;margin-right:auto;color:var(--am);white-space:nowrap}
@@ -156,6 +156,43 @@ h1,h2,h3,.st,.btn,.ts,#banner,.fl,.ing small,.tabs button,.stat,.chip small{font
 .crown{position:absolute;left:50%;top:-16px;transform:translateX(-50%);font-size:1.1rem;animation:pop .4s}
 .vip .bub{background:#ffe9a8;box-shadow:0 3px 0 #b8860b}
 #tt{color:#fff;text-shadow:0 2px 0 var(--ol)}
+#scene.rain::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:repeating-linear-gradient(105deg,transparent 0 14px,rgba(190,215,255,.35) 14px 16px);background-size:60px 60px;animation:rain .5s linear infinite}
+@keyframes rain{to{background-position:-20px 60px}}
+.st.ev{color:var(--am)}
+.px{image-rendering:pixelated;display:block;margin:0 auto;filter:drop-shadow(0 2px 0 rgba(0,0,0,.45))}
+.chip .px,.rc .px{margin:0}
+#bar{grid-template-columns:240px 1fr 1fr;align-items:start}
+#bk{align-self:stretch;min-height:0}
+#book{max-height:250px;overflow:auto;padding-right:4px}
+#work,#out{display:grid;gap:10px;align-content:start}
+.rc{cursor:pointer}.rc.lk{cursor:not-allowed}.rc .ii{display:flex;align-items:center;gap:2px}
+.ing{display:grid;place-items:center;gap:2px;padding:8px 2px 4px}
+.ing.hint{border-color:var(--am);animation:pop .5s 3;background:var(--pn2)}
+#ingr{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:6px}#info{min-width:90px!important}
+#stns{display:flex;gap:8px;flex-wrap:wrap}
+.sn{flex:1;min-width:76px;max-width:120px;background:var(--bg);border:3px solid var(--ol);box-shadow:0 4px 0 var(--ol);padding:6px 4px;text-align:center;display:grid;gap:4px}
+.sn.on{border-color:var(--am)}.sn small{font-size:.65rem;color:var(--mu);font-weight:800;font-family:'Pixelify Sans',monospace}
+.pgb{height:9px;background:#120a16;border:2px solid var(--ol)}.pgb i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--gr) 0 6px,#5fb86d 6px 8px)}
+#ft{flex:none;text-align:center;padding:8px;background:var(--pn);border-top:4px solid var(--ol);font-family:'Pixelify Sans',monospace;font-size:.8rem;color:var(--mu)}
+#ft b{color:var(--am)}.cr{font-size:.78rem;margin:12px 0 0!important}
+::-webkit-scrollbar{width:10px;height:10px}::-webkit-scrollbar-track{background:var(--ol)}::-webkit-scrollbar-thumb{background:var(--am);border:2px solid var(--ol)}
+@media(max-width:900px){#bar{grid-template-columns:1fr}#bk{order:3}#book{max-height:220px}}
+#bk{background:#1f2e29;border:4px solid #8a5636;box-shadow:0 4px 0 var(--ol),inset 0 0 0 3px var(--ol);padding:8px 10px}
+#bk h3{color:#fff6c8;text-align:center;letter-spacing:1px;border-bottom:3px dashed rgba(255,255,255,.3);padding-bottom:6px}
+#book .rc{pointer-events:none;background:transparent;border:0;border-bottom:2px dashed rgba(255,255,255,.18);box-shadow:none;border-radius:0;padding:4px 2px;color:#f4f1dc}
+#book .rc>span:last-child{color:#ffe08a}#book .rc.lk{opacity:.5}
+.chip{cursor:pointer}.chip:hover:not(.ok){background:#ffe9a8}
+.cust .face img{animation:bob 1.2s steps(2) infinite}.sn.on .px{animation:bob .5s steps(2) infinite}
+@keyframes bob{50%{transform:translateY(-3px)}}@keyframes blink{50%{filter:brightness(1.35)}}
+.btn.rdy{animation:blink .7s steps(2) infinite}
+.cust.kilat .bub{background:#d7f0ff;box-shadow:0 3px 0 #2a7bb8}.cust.krit .bub{background:#f0d7ff;box-shadow:0 3px 0 #7b2ab8}
+#scene::before{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 100%,rgba(255,179,71,calc(.1 + .2*var(--p))),transparent 70%),linear-gradient(rgba(20,8,40,calc(.5*var(--p))),transparent 80%)}
+#hud{background:linear-gradient(var(--pn2),var(--pn))}
+#staff{position:absolute;right:3%;top:96px;display:flex;gap:12px;z-index:1}.stf{display:grid;justify-items:center;font:.62rem 'Pixelify Sans',monospace;color:#fff}.stf .px{animation:bob .9s steps(2) infinite}
+#lamps{position:absolute;left:49.5%;top:0;display:flex;gap:20px;z-index:3;pointer-events:none}#lamps i{display:block;width:4px;height:26px;background:var(--ol);position:relative}#lamps i::after{content:"";position:absolute;left:-12px;top:24px;width:28px;height:14px;background:var(--am);border:3px solid var(--ol);box-shadow:0 0 24px 8px rgba(255,179,71,.45)}
+.ing small.ic{color:var(--gr);font-size:.58rem}
+#mix{flex-wrap:nowrap;gap:8px}#cup{min-width:0}#cup span{width:34px;height:34px}#info{min-width:80px!important}
+@media(max-width:900px){#mix{flex-wrap:wrap}#staff{display:none}#lamps{display:none}}
 </style>
 </head>
 <body>
@@ -171,11 +208,11 @@ h1,h2,h3,.st,.btn,.ts,#banner,.fl,.ing small,.tabs button,.stat,.chip small{font
   </header>
   <div id="tb"><div id="tf"></div><span id="tt"></span></div>
   <section id="scene">
-    <div class="win"><div class="sun"></div><i class="cl"></i><i class="cl b"></i><div class="sky"></div></div><div id="decor"></div><div id="banner"></div><div class="floor"></div>
+    <div class="win"><div class="sun"></div><i class="cl"></i><i class="cl b"></i><div class="sky"></div></div><div id="decor"></div><div id="banner"></div><div id="staff"></div><div id="lamps"></div><div class="floor"></div>
     <div id="seats"></div><div class="counter"></div>
   </section>
   <section id="bar">
-    <div><h3>📖 Buku Resep <small style="color:var(--mu);font-weight:500">(tap untuk isi cangkir)</small></h3><div id="book"></div></div>
+    <div id="bk"><h3>📋 Menu Kedai</h3><div id="book"></div></div>
     <div id="work">
       <div><h3>1 · Pilih bahan</h3><div id="ingr"></div></div>
       <div><h3>2 · Racik</h3>
@@ -183,38 +220,60 @@ h1,h2,h3,.st,.btn,.ts,#banner,.fl,.ing small,.tabs button,.stat,.chip small{font
           <div id="info"></div>
           <button class="btn" id="bBrew" onclick="brew()">Racik!</button>
           <button class="btn sec" onclick="clearCup()" title="Kosongkan cangkir">🗑️</button>
-        </div><div id="pg"><i></i></div>
+        </div>
       </div>
-      <div><h3>3 · Sajikan <small style="color:var(--mu);font-weight:500">(tap minuman siap saji)</small></h3><div id="tray"></div></div>
+    </div>
+    <div id="out">
+      <div><h3>3 · Stasiun Racik</h3><div id="stns"></div></div>
+      <div><h3>4 · Meja Saji <small style="color:var(--mu);font-weight:500">(tap minuman siap)</small></h3><div id="tray"></div></div>
     </div>
   </section>
+  <footer id="ft">Crafted with <span style="color:var(--rs)">♥</span> by <b>Farel Bayone Meijabar</b> · © 2026</footer>
 </div>
-<div id="ov"></div><div id="tut"></div><div id="toasts"></div>
+<div id="ov"></div><div id="tut"></div><div id="toasts" aria-live="polite"></div>
 
 <script src="config.js"></script>
 <script>
 const $=s=>document.querySelector(s),rnd=(a,b)=>a+Math.random()*(b-a),pick=a=>a[Math.floor(Math.random()*a.length)];
-const KEY='kedaiSenjaSave',DAY=75;
+let DAY=75;const KEY='kedaiSenjaSave';
 let S={money:40,day:1,rating:3,up:{},seen:false,mute:false,total:0,best:0,name:'Barista'+Math.floor(100+Math.random()*900)};
 try{Object.assign(S,JSON.parse(localStorage.getItem(KEY)||'{}'))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
 if(!S.pid||!S.sec){const h=Array.from(crypto.getRandomValues(new Uint8Array(32)),b=>b.toString(16).padStart(2,'0')).join('');S.pid=h.slice(0,8)+'-'+h.slice(8,12)+'-'+h.slice(12,16)+'-'+h.slice(16,20)+'-'+h.slice(20,32);S.sec=h.slice(32);save()}
 const fmt=n=>'Rp'+(n*1000).toLocaleString('id-ID');
-const ING={kopi:['🫘','Kopi'],teh:['🍃','Teh'],susu:['🥛','Susu'],gula:['🧂','Gula'],es:['🧊','Es'],coklat:['🍫','Cokelat'],roti:['🍞','Roti']};
+const ING={kopi:['🫘','Kopi'],teh:['🍃','Teh'],susu:['🥛','Susu'],gula:['🧂','Gula'],es:['🧊','Es'],coklat:['🍫','Cokelat'],roti:['🍞','Roti'],madu:['🍯','Madu'],keju:['🧀','Keju']};
 const R={
  kopi:{n:'Kopi Hitam',e:'☕',i:['kopi'],p:12},
  kopisusu:{n:'Kopi Susu',e:'🥤',i:['kopi','susu'],p:18},
  teh:{n:'Teh Manis',e:'🍵',i:['teh','gula'],p:14},
  eskopi:{n:'Es Kopi Susu',e:'🧋',i:['kopi','susu','es'],p:28,u:'r_es'},
- coklat:{n:'Cokelat Panas',e:'🍫',i:['susu','coklat'],p:24,u:'r_coklat'},
- roti:{n:'Roti Bakar',e:'🍞',i:['roti'],p:16,u:'r_roti'}};
+ coklat:{n:'Cokelat Panas',e:'🍬',i:['susu','coklat'],p:24,u:'r_coklat'},
+ roti:{n:'Roti Bakar',e:'🥖',i:['roti'],p:16,u:'r_roti'},
+ esteh:{n:'Es Teh Manis',e:'🍹',i:['teh','gula','es'],p:20,u:'r_esteh'},
+ tehsusu:{n:'Teh Susu',e:'🫖',i:['teh','susu','gula'],p:22,u:'r_tehsusu'},
+ mocha:{n:'Mocha',e:'🍨',i:['kopi','susu','coklat'],p:34,u:'r_mocha'},
+ rotimadu:{n:'Roti Madu',e:'🥞',i:['roti','madu'],p:22,u:'r_rotimadu'},
+ rotikeju:{n:'Roti Keju',e:'🥪',i:['roti','keju'],p:24,u:'r_rotikeju'},
+ lattemadu:{n:'Latte Madu',e:'🍼',i:['kopi','susu','madu'],p:32,u:'r_lattemadu'},
+ spesial:{n:'Roti Spesial',e:'🥐',i:['roti','keju','madu'],p:40,u:'r_spesial'}};
+const ICOST={kopi:2,teh:1,susu:2,gula:1,es:1,coklat:3,roti:2,madu:3,keju:3},rcost=k=>R[k].i.reduce((a,x)=>a+ICOST[x],0);
 const UP=[
  {id:'mesin',c:'dapur',n:'Mesin Espresso',e:'⚙️',d:'Meracik lebih cepat',cost:[80,170,300]},
- {id:'rak',c:'dapur',n:'Rak Saji',e:'🧺',d:'+1 slot minuman siap',cost:[60,130,230]},
- {id:'kursi',c:'dapur',n:'Kursi Tambahan',e:'🪑',d:'+1 kursi pelanggan',cost:[100,220]},
+ {id:'rak',c:'dapur',n:'Meja Saji',e:'🍽️',d:'+1 slot minuman siap (maks. 8)',cost:[50,100,170,260,380,500]},
+ {id:'kursi',c:'dapur',n:'Kursi Tambahan',e:'🪑',d:'+1 kursi pelanggan',cost:[100,220,380]},
+ {id:'r_rotimadu',c:'dapur',n:'Resep Roti Madu',e:'🥞',d:'Roti + Madu · Rp22k',cost:[140]},
+ {id:'r_rotikeju',c:'dapur',n:'Resep Roti Keju',e:'🥪',d:'Roti + Keju · Rp24k',cost:[160]},
+ {id:'r_lattemadu',c:'dapur',n:'Resep Latte Madu',e:'🍼',d:'Kopi + Susu + Madu · Rp32k',cost:[230]},
+ {id:'r_spesial',c:'dapur',n:'Resep Roti Spesial',e:'🥐',d:'Roti + Keju + Madu · Rp40k',cost:[280]},
+ {id:'barista',c:'dapur',n:'Barista Racik',e:'👨‍🍳',d:'Meracik otomatis pesanan pelanggan',cost:[400,800]},
+ {id:'stasiun',c:'dapur',n:'Stasiun Racik',e:'☕',d:'+1 mesin: racik beberapa minuman sekaligus',cost:[120,240,400]},
  {id:'r_es',c:'dapur',n:'Resep Es Kopi Susu',e:'🧋',d:'Kopi + Susu + Es · Rp28k',cost:[120]},
  {id:'r_coklat',c:'dapur',n:'Resep Cokelat Panas',e:'🍫',d:'Susu + Cokelat · Rp24k',cost:[150]},
  {id:'r_roti',c:'dapur',n:'Pemanggang Roti',e:'🍞',d:'Roti Bakar · Rp16k',cost:[110]},
+ {id:'r_esteh',c:'dapur',n:'Resep Es Teh Manis',e:'🧊',d:'Teh + Gula + Es · Rp20k',cost:[90]},
+ {id:'r_tehsusu',c:'dapur',n:'Resep Teh Susu',e:'🫖',d:'Teh + Susu + Gula · Rp22k',cost:[130]},
+ {id:'r_mocha',c:'dapur',n:'Resep Mocha',e:'🍨',d:'Kopi + Susu + Cokelat · Rp34k',cost:[200]},
+ {id:'asisten',c:'dapur',n:'Asisten Barista',e:'🧑‍🍳',d:'Menyajikan minuman siap otomatis',cost:[300,550]},
  {id:'d1',c:'dekor',n:'Tanaman Hias',e:'🪴',d:'+7% kesabaran & tip',cost:[60]},
  {id:'d2',c:'dekor',n:'Lampu Gantung',e:'💡',d:'+7% kesabaran & tip',cost:[90]},
  {id:'d3',c:'dekor',n:'Poster Vintage',e:'🖼️',d:'+7% kesabaran & tip',cost:[120]},
@@ -222,16 +281,54 @@ const UP=[
  {id:'d5',c:'dekor',n:'Piano Kecil',e:'🎹',d:'+7% kesabaran & tip',cost:[320]},
  {id:'d6',c:'dekor',n:'Kucing Kafe',e:'🐈',d:'+7% kesabaran & tip',cost:[250]}];
 const lvl=id=>S.up[id]||0,unlocked=k=>!R[k].u||lvl(R[k].u);
-const seats=()=>3+lvl('kursi'),slots=()=>2+lvl('rak'),brewT=()=>[3,2.3,1.7,1.1][lvl('mesin')];
+const seats=()=>3+lvl('kursi'),slots=()=>2+lvl('rak'),brewT=()=>[3,2.3,1.7,1.1][lvl('mesin')],asT=()=>[0,12,7][lvl('asisten')],bT=()=>[0,14,9][lvl('barista')];
 const charm=()=>UP.filter(u=>u.c==='dekor'&&lvl(u.id)).length;
 const FACES=['🧑','👩','👨','🧓','👧','🧔','👩‍🦱','🧑‍🎤','👴','👩‍💻'];
-const newG=()=>({run:false,t:0,cs:[],tray:[],cup:[],brew:null,earned:0,served:0,missed:0,combo:0,spawn:1,id:1,rush:false,closed:false,over:false});
+const LINES=['Enak banget!','Mantap!','Pas sekali 👌','Makasih ya!','Kopinya juara','Besok balik lagi!'],rep=()=>Math.floor(Math.sqrt(S.total/25));
+const EVT={festival:{n:'🎉 Hari Festival! Ramai & tip besar',spawn:.6,tip:1.5},hujan:{n:'🌧️ Hujan turun! Pelanggan berdatangan berteduh',spawn:.75,tip:1.4},cerah:{n:'🌤️ Langit cerah, suasana santai',spawn:1.15,pat:1.1}};
+const newG=()=>({cost:0,lv:0,st:[],ev:null,asT:0,bestCombo:0,run:false,t:0,cs:[],tray:[],cup:[],brew:null,earned:0,served:0,missed:0,combo:0,spawn:1,id:1,rush:false,closed:false,over:false});
 let G=newG(),ovOpen=false,tutOn=false,back=null;
 
 /* ---------- audio ---------- */
 let AC;function snd(f=440,d=.09,t='sine',v=.05){if(S.mute)return;try{AC=AC||new AudioContext();const o=AC.createOscillator(),g=AC.createGain();o.type=t;o.frequency.value=f;g.gain.value=v;g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+d);o.connect(g);g.connect(AC.destination);o.start();o.stop(AC.currentTime+d)}catch(e){}}
 const chime=()=>{snd(880,.12,'triangle');setTimeout(()=>snd(1320,.2,'triangle'),90)};
 function toggleSnd(){S.mute=!S.mute;save();music();hud()}
+
+/* ---------- pixel emoji ---------- */
+/* ---------- hand-drawn pixel sprites (10 wide, 1 char = 1 pixel) ---------- */
+const SP={},BASE={O:'#120a16',W:'#fdeedd',s:'#d9d0e0',R:'#f0708a'},mk=(e,g,p)=>SP[e]={r:g.split('|'),p:{...BASE,...p}};
+const MUG='...s..s...|..s..s....|.OOOOOOO..|.OTTTTTOO.|.OLLLLLOWO|.OLLLLLOWO|.OLLLLLOO.|..OLLLLO..|..OOOOOO..|..........',
+ GLS='......RR..|.OOOOOOOO.|.OTTTTTTO.|.OLILLILO.|.OLLLILLO.|.OILLLLIO.|.OLLILLLO.|..OLLLLO..|..OOOOOO..|..........',
+ TST='..........|.OOOOOOOO.|OCCCCCCCCO|OCTTTTTTCO|OCTDTTDTCO|OCTTTTTTCO|OCTTDTTTCO|OCCCCCCCCO|.OOOOOOOO.|..........';
+const gl=(l,t,i)=>({L:l,T:t,I:i||l}),mg=(l,t)=>({L:l,T:t}),ts=(t,d)=>({C:'#c98c4a',T:t,D:d});
+mk('☕',MUG,mg('#4a2a19','#6b3f26'));mk('🍵',MUG,mg('#d9a441','#e8c46a'));mk('🫖',MUG,mg('#e0b98a','#f5e6d0'));mk('🍬',MUG,mg('#5a2d1c','#f5e6d0'));mk('🍨',MUG,mg('#6b3f26','#d9a441'));
+mk('🥤',GLS,gl('#c98c60','#f0d9b5'));mk('🧋',GLS,gl('#c98c60','#f0d9b5','#ffffff'));mk('🍹',GLS,gl('#d9a441','#e8c46a','#ffffff'));mk('🍼',GLS,gl('#e0b060','#f5e6d0'));
+mk('🥖',TST,ts('#f3d28f','#e8b860'));mk('🥞',TST,ts('#f2a900','#ffd23d'));mk('🥪',TST,ts('#ffd23d','#d9a400'));mk('🥐',TST,ts('#f2a900','#ffd23d'));
+mk('🫘','..........|...OOOO...|..OBBBBO..|.OBBBdBBO.|.OBBdBBBO.|.OBBBdBBO.|.OBBdBBBO.|..OBBBBO..|...OOOO...|..........',{B:'#8a5636',d:'#4a2a19'});
+mk('🍃','..........|.......OO.|.....OOGGO|...OOGGGGO|..OGGGGGO.|.OGGgGGOO.|.OGGGgOO..|OGGGOOO...|.OO.......|..........',{G:'#5fb86d',g:'#2f7d45'});
+mk('🥛','..........|..OOOOOO..|.OWWWWWWO.|.OMMMMMMO.|.OMWWWWMO.|.OMMMMMMO.|.OWWWWWWO.|.OWWWWWWO.|.OOOOOOOO.|..........',{M:'#7ec8ff'});
+mk('🧂','..........|...OOOO...|..OggggO..|.OOOOOOOO.|.OWWWWWWO.|.OWWsWWWO.|.OWWWWsWO.|.OWsWWWWO.|.OOOOOOOO.|..........',{g:'#a9a0b8'});
+mk('🧊','..........|.OOOOOOO..|.OIIIIIIO.|.OIwwIIIO.|.OIwIIIIO.|.OIIIIBBO.|.OIIIBBBO.|.OOOOOOOO.|..........|..........',{I:'#bfe9ff',w:'#ffffff',B:'#7ec8ff'});
+mk('🍫','..........|.OOOOOOOOO|.OBBOBBOBO|.OBlOBlOBO|.OOOOOOOOO|.OBBOBBOBO|.OBlOBlOBO|.OOOOOOOOO|..........|..........',{B:'#6b3f26',l:'#8a5636'});
+mk('🍞','..........|..OOOOOO..|.OCCCCCCO.|OCCTTTTCCO|OCTTTTTTCO|OCTTTTTTCO|OCTTTTTTCO|.OCCCCCCO.|..OOOOOO..|..........',{C:'#c98c4a',T:'#f3d28f'});
+mk('🍯','..........|..OOOOOO..|..OggggO..|.OOOOOOOO.|.OHHHHHHO.|.OHwHHHHO.|.OHHHHHHO.|.OHHHHHHO.|.OOOOOOOO.|..........',{g:'#a9a0b8',H:'#f2a900',w:'#fff3b0'});
+mk('🧀','..........|..........|......OOOO|....OOYYYO|..OOYYoYYO|.OYYYYYYYO|OYYoYYYYYO|OOOOOOOOOO|..........|..........',{Y:'#ffd23d',o:'#d9a400'});
+const CHEF='..OOOOOO..|.OWWWWWWO.|.OWWWWWWO.|..OOOOOO..|..OSSSSO..|..OSeSeO..|..OSSmSO..|...OSSO...|.OBBBBBBO.|OBBwwwwBBO|OBBwwwwBBO|OOOOOOOOOO',cp={S:'#f0b88f',e:'#120a16',m:'#b5504a',w:'#ffffff'};
+mk('👨‍🍳',CHEF,{...cp,B:'#f0708a'});mk('🧑‍🍳',CHEF,{...cp,B:'#7fd18b'});
+mk('🔒','...OOOO...|..O....O..|..O....O..|.OOOOOOOO.|.OYYYYYYO.|.OYYooYYO.|.OYYooYYO.|.OYYYYYYO.|.OOOOOOOO.|..........',{Y:'#ffb347',o:'#8a5636'});
+mk('🪴','..G..G.G..|.GGG.GGG..|..GGGGG...|...GGG....|.OOOOOOOO.|.OPPPPPPO.|..OPPPPO..|..OPPPPO..|...OOOO...|..........',{G:'#5fb86d',P:'#c2693a'});
+mk('💡','...OOOO...|..OYYYYO..|.OYYwYYYO.|.OYYYYYYO.|.OYYYYYYO.|..OYYYYO..|...OggO...|...OggO...|...OOOO...|..........',{Y:'#ffd36b',w:'#fff3b0',g:'#a9a0b8'});
+mk('🖼️','..........|.FFFFFFFF.|.FSSSSYSF.|.FSSSSSSF.|.FSGSSSGF.|.FGGGSGGF.|.FGGGGGGF.|.FFFFFFFF.|..........|..........',{F:'#8a5636',S:'#f0708a',Y:'#ffd36b',G:'#5a2d6b'});
+mk('🐠','..........|.OOOOOOOO.|OBBBBBBBBO|OBBFFFBBBO|OBFFeFFBFO|OBBFFFBFFO|OBBBBBBBBO|.OOOOOOOO.|..........|..........',{B:'#7ec8ff',F:'#ff8a3d',e:'#120a16'});
+mk('🎹','..........|.OOOOOOOO.|.OKKKKKKO.|.OKKKKKKO.|.OWKWKWKWO|.OWWWWWWWO|.OWOWOWOWO|.OOOOOOOOO|.O......O.|.O......O.',{K:'#2a1630'});
+mk('🐈','.O......O.|.OO....OO.|.OOOOOOOO.|.OCCCCCCO.|.OCeCCeCO.|.OCCppCCO.|.OCCCCCCO.|..OOOOOO..|..........|..........',{C:'#ffb347',e:'#120a16',p:'#f0708a'});
+function spr(e,z){const d=SP[e];if(!d)return null;const h=d.r.length,w=Math.max(...d.r.map(r=>r.length)),k=Math.max(1,Math.round(z/10));
+ if(!d.u){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');d.r.forEach((r,y)=>[...r].forEach((ch,i)=>{const col=d.p[ch];if(col){x.fillStyle=col;x.fillRect(i,y,1,1)}}));d.u=c.toDataURL()}
+ return `<img class="px" alt="" src="${d.u}" style="width:${w*k}px;height:${h*k}px">`}
+const PXC={};
+function px(e,z=36){const q=spr(e,z);if(q)return q;if(!(e in PXC)){let u='';try{const c=document.createElement('canvas');c.width=c.height=24;const x=c.getContext('2d',{willReadFrequently:true});x.font='19px "Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(e,12,13);const d=x.getImageData(0,0,24,24),a=d.data;for(let i=0;i<a.length;i+=4){if(a[i+3]<110)a[i+3]=0;else{a[i+3]=255;for(let j=0;j<3;j++)a[i+j]=Math.min(255,Math.round(a[i+j]/64)*64)}}x.putImageData(d,0,0);u=c.toDataURL()}catch(_){}PXC[e]=u}
+ return PXC[e]?`<img class="px" alt="" src="${PXC[e]}" style="width:${z}px;height:${z}px">`:e}
+function hint(k){document.querySelectorAll('.ing').forEach((b,i)=>{b.classList.remove('hint');if(R[k].i.includes(ikeys[i])){void b.offsetWidth;b.classList.add('hint')}});setTimeout(()=>document.querySelectorAll('.ing.hint').forEach(b=>b.classList.remove('hint')),1600)}
 
 /* ---------- ui helpers ---------- */
 function toast(t){const d=document.createElement('div');d.className='ts';d.textContent=t;$('#toasts').appendChild(d);setTimeout(()=>d.remove(),1900)}
@@ -243,40 +340,44 @@ function closeModal(){$('#ov').classList.remove('on');ovOpen=false}
 function bump(id){const e=$(id);e.classList.remove('bump');void e.offsetWidth;e.classList.add('bump')}
 let lastMoney=null;
 function hud(){const m=$('#sMoney');m.textContent='💰 '+fmt(S.money);if(lastMoney!==null&&lastMoney!==S.money)bump('#sMoney');lastMoney=S.money;
- $('#sDay').textContent='📅 Hari '+S.day;$('#sRate').textContent='⭐ '+S.rating.toFixed(1);
+ $('#sDay').textContent='📅 Hari '+S.day;$('#sRate').textContent='⭐ '+S.rating.toFixed(1)+' · Lv'+rep()+(S.star?' · ✨'+S.star:'');
  const c=$('#sCombo');c.textContent='🔥 x'+G.combo;c.style.opacity=G.combo>1?1:.45}
 
 /* ---------- bar: ingredients, book, cup, tray ---------- */
 const ikeys=Object.keys(ING);
-function renderIngr(){$('#ingr').innerHTML=ikeys.map((k,i)=>`<button class="ing" onclick="addIng('${k}')" aria-label="${ING[k][1]}"><kbd>${i+1}</kbd>${ING[k][0]}<small>${ING[k][1]}</small></button>`).join('')}
-function renderBook(){$('#book').innerHTML=Object.keys(R).map(k=>{const r=R[k],ok=unlocked(k);return `<button class="rc ${ok?'':'lk'}" ${ok?`onclick="fillCup('${k}')"`:'onclick="toast(\'Beli resep ini di Toko 🛒\')"'}><span class="e">${ok?r.e:'🔒'}</span><span><b>${r.n}</b><span class="ii">${r.i.map(x=>ING[x][0]).join('+')}</span></span><span>${fmt(r.p)}</span></button>`}).join('')}
+function renderIngr(){$('#ingr').innerHTML=ikeys.map((k,i)=>`<button class="ing" onclick="addIng('${k}')" aria-label="${ING[k][1]}"><kbd>${i+1}</kbd>${px(ING[k][0],34)}<small>${ING[k][1]}</small><small class="ic">Rp${ICOST[k]}k</small></button>`).join('')}
+function renderBook(){$('#book').innerHTML=Object.keys(R).map(k=>{const r=R[k],ok=unlocked(k);return `<div class="rc ${ok?'':'lk'}"><span class="e">${px(ok?r.e:'🔒',28)}</span><span><b>${r.n}</b><span class="ii">${ok?r.i.map(x=>px(ING[x][0],16)).join('+'):'terkunci'}</span></span><span>${fmt(r.p)}</span></div>`}).join('')}
+function stN(){return 1+lvl('stasiun')}
+function renderSt(){$('#stns').innerHTML=Array.from({length:stN()},(_,i)=>{const b=G.st&&G.st[i];return `<div class="sn ${b?'on':''}" id="st${i}">${px(b?R[b.k].e:'☕',30)}<div class="pgb"><i style="width:${b?(b.rdy?100:Math.min(100,b.t/brewT()*100)):0}%"></i></div><small>${b?(b.rdy?'Meja penuh!':R[b.k].n):'Kosong'}</small></div>`}).join('')}
 const match=c=>Object.keys(R).find(k=>unlocked(k)&&R[k].i.length===c.length&&[...R[k].i].sort().join()===[...c].sort().join());
-function renderCup(){const c=G.cup;$('#cup').innerHTML=[0,1,2].map(i=>`<span class="${i===c.length-1?'f':''}">${c[i]?ING[c[i]][0]:''}</span>`).join('');
+function renderCup(){const c=G.cup;$('#cup').innerHTML=[0,1,2].map(i=>`<span class="${i===c.length-1?'f':''}">${c[i]?px(ING[c[i]][0],28):''}</span>`).join('');
  const m=match(c);$('#info').innerHTML=!c.length?'Cangkir kosong<small>Pilih bahan di atas</small>':m?`${R[m].e} ${R[m].n}<small>Resep benar! Tekan Racik</small>`:`Belum cocok resep<small>Cek buku resep</small>`;
- $('#bBrew').disabled=!!G.brew}
-function renderTray(){const n=slots();$('#tray').innerHTML=Array.from({length:n},(_,i)=>G.tray[i]?`<button class="tr" onclick="serve(${i},this)" title="${R[G.tray[i]].n}">${R[G.tray[i]].e}</button>`:`<div class="es"></div>`).join('')+(G.brew?`<span style="color:var(--mu);font-size:.8rem">⏳ ${R[G.brew.k].n}…</span>`:'')}
-function renderBar(){renderBook();renderCup();renderTray();renderDecor();syncSeats()}
-function renderDecor(){$('#decor').innerHTML=UP.filter(u=>u.c==='dekor'&&lvl(u.id)).map(u=>`<span title="${u.n}">${u.e}</span>`).join('')}
+ $('#bBrew').disabled=!!G.brew;$('#bBrew').classList.toggle('rdy',!!m)}
+function renderTray(){const n=slots();$('#tray').innerHTML=Array.from({length:n},(_,i)=>G.tray[i]?`<button class="tr" onclick="serve(${i},this)" title="${R[G.tray[i]].n}" aria-label="Sajikan ${R[G.tray[i]].n}">${px(R[G.tray[i]].e,38)}</button>`:`<div class="es"></div>`).join('')+(G.brew?`<span style="color:var(--mu);font-size:.8rem">⏳ ${R[G.brew.k].n}…</span>`:'')}
+function renderBar(){renderSt();renderBook();renderCup();renderTray();renderDecor();syncSeats()}
+function renderDecor(){$('#staff').innerHTML=(lvl('barista')?`<div class="stf">${px('👨‍🍳',44)}<small>Barista</small></div>`:'')+(lvl('asisten')?`<div class="stf">${px('🧑‍🍳',44)}<small>Asisten</small></div>`:'');$('#lamps').innerHTML=lvl('d2')?'<i></i><i></i>':'';$('#decor').innerHTML=UP.filter(u=>u.c==='dekor'&&lvl(u.id)).map(u=>`<span title="${u.n}">${px(u.e,32)}</span>`).join('')}
 function syncSeats(){const s=$('#seats');while(s.children.length<seats()){const d=document.createElement('div');d.className='seat';s.appendChild(d)}}
-function addIng(k){if(G.brew)return toast('Tunggu racikan selesai ⏳');if(G.cup.length>=3){shake($('#cup'));return toast('Cangkir penuh (maks. 3)')}G.cup.push(k);snd(500+G.cup.length*120,.07);renderCup()}
+function addIng(k){if(G.brew)return toast('Tunggu racikan selesai ⏳');if(G.cup.length>=3){shake($('#cup'));return toast('Cangkir penuh (maks. 3)')}G.cup.push(k);S.money=Math.max(0,S.money-ICOST[k]);G.cost+=ICOST[k];hud();snd(500+G.cup.length*120,.07);renderCup()}
 function fillCup(k){if(G.brew)return toast('Tunggu racikan selesai ⏳');G.cup=[...R[k].i];snd(640,.08);renderCup()}
-function clearCup(){if(G.brew)return;G.cup=[];snd(300,.08);renderCup()}
+function clearCup(){if(G.brew)return;G.cup.forEach(x=>{S.money+=ICOST[x];G.cost-=ICOST[x]});hud();G.cup=[];snd(300,.08);renderCup()}
 
 /* ---------- brewing & serving ---------- */
-function brew(){if(G.brew||!G.run)return toast(G.run?'Sedang meracik…':'Mulai hari dulu ☀️');
+function brew(){if(!G.run)return toast('Mulai hari dulu ☀️');
  if(!G.cup.length)return toast('Pilih bahan dulu 🫘');
- if(G.tray.length>=slots())return toast('Rak saji penuh — sajikan dulu!');
  const m=match(G.cup);if(!m){shake($('#cup'));snd(180,.2,'sawtooth');G.cup=[];renderCup();return toast('Racikan salah, bahan terbuang 😬')}
- G.brew={k:m,t:0};G.cup=[];snd(300,.15,'triangle');renderCup();renderTray()}
+ const i=[...Array(stN()).keys()].find(i=>!G.st[i]);if(i===undefined)return toast('Semua stasiun sibuk ⏳ (beli stasiun tambahan di Toko)');
+ G.st[i]={k:m,t:0};G.cup=[];snd(300,.15,'triangle');renderCup();renderSt()}
 function serve(i,btn){const k=G.tray[i];const c=G.cs.filter(c=>c.need.includes(k)&&!c.done.includes(k)).sort((a,b)=>a.pat-b.pat)[0];
  if(!c){shake(btn);snd(200,.12,'square');return toast('Tidak ada yang memesan itu')}
  G.tray.splice(i,1);c.done.push(k);snd(660,.1,'triangle');renderTray();
  c.el.querySelector(`[data-k=${k}]`).classList.add('ok');
  if(c.done.length===c.need.length)pay(c)}
-function pay(c){const base=c.need.reduce((s,k)=>s+R[k].p,0)*(c.vip?2:1),r=Math.max(0,c.pat/c.max);
- G.combo++;S.served=(S.served||0)+1;S.maxCombo=Math.max(S.maxCombo||0,G.combo);if(c.vip)S.vip=(S.vip||0)+1;const tip=Math.round(base*.25*r)+charm()*2,bonus=G.combo>2?Math.min(G.combo-2,5)*3:0,tot=base+tip+bonus;
+function serveTo(id,k){const c=G.cs.find(x=>x.id===id);if(!c||!G.run||ovOpen||tutOn||c.done.includes(k))return;const i=G.tray.indexOf(k);if(i<0){snd(200,.12,'square');return toast('Belum ada '+R[k].n+' di meja saji')}
+ G.tray.splice(i,1);c.done.push(k);snd(660,.1,'triangle');renderTray();c.el.querySelector(`[data-k=${k}]`).classList.add('ok');if(c.done.length===c.need.length)pay(c)}
+function pay(c){const base=c.need.reduce((s,k)=>s+R[k].p,0)*(c.vip?2:c.ty==='kilat'?1.5:1),r=Math.max(0,c.pat/c.max);
+ G.combo++;G.bestCombo=Math.max(G.bestCombo,G.combo);S.served=(S.served||0)+1;S.maxCombo=Math.max(S.maxCombo||0,G.combo);if(c.vip)S.vip=(S.vip||0)+1;const tip=Math.round(base*.25*r*((EVT[G.ev]||{}).tip||1))+charm()*2+Math.floor(rep()/2)+(S.star||0),bonus=G.combo>2?Math.min(G.combo-2,5)*3:0,tot=Math.round((base+tip+bonus)*(1+.03*(S.star||0)));
  S.money+=tot;S.total+=tot;G.earned+=tot;G.served++;S.rating=Math.min(5,S.rating+(r>.5?.1:.04));
- fx(c.el,'+'+fmt(tot)+(bonus?' 🔥':''));chime();c.el.querySelector('.mood').textContent='😋';leave(c,true);hud();checkAch()}
+ fx(c.el,'+'+fmt(tot)+(bonus?' 🔥':''));setTimeout(()=>{if(c.el.isConnected)fx(c.el,pick(LINES))},350);if(c.ty==='krit'){if(r>.5){S.rating=Math.min(5,S.rating+.3);S.money+=30;S.total+=30;G.earned+=30;toast('🧐 Kritikus terkesan! +Rp30.000')}else{S.rating=Math.max(1,S.rating-.2);toast('🧐 Kritikus kurang puas…')}}chime();c.el.querySelector('.mood').textContent='😋';leave(c,true);if(rep()>G.lv){G.lv=rep();toast('🏅 Kafe naik ke Level '+G.lv+'! Tip permanen naik')}hud();checkAch()}
 function leave(c,ok){G.cs=G.cs.filter(x=>x!==c);c.el.classList.add(ok?'out-happy':'out-sad');setTimeout(()=>c.el.remove(),600)}
 
 /* ---------- customers ---------- */
@@ -291,11 +392,11 @@ function sprite(){
 function spawn(){const free=[...Array(seats()).keys()].filter(i=>!G.cs.some(c=>c.seat===i));if(!free.length)return;
  const un=Object.keys(R).filter(unlocked),n=Math.random()<Math.min(.6,.12+S.day*.07)?2:1,need=[];
  while(need.length<n)need.push(...[pick(un)].filter(k=>!need.includes(k)));
- const vip=S.day>=2&&Math.random()<.12,max=(n===2?44:30)*(1+.07*charm())*Math.max(.7,1-S.day*.02)*(vip?.75:1),seat=pick(free),el=document.createElement('div');
- el.className='cust'+(vip?' vip':'');el.innerHTML=`<div class="bub">${need.map(k=>`<span class="chip" data-k="${k}"><span>${R[k].e}</span><small>${R[k].n.split(' ').pop()}</small></span>`).join('')}</div><div class="face"><img alt="" src="${sprite()}"><span class="mood">😊</span>${vip?'<span class="crown">👑</span>':''}</div><div class="pat"><i></i></div>`;
+ const vip=S.day>=2&&Math.random()<.12,ty=vip?'':S.day>=2&&Math.random()<.15?'kilat':S.day>=4&&Math.random()<.1?'krit':'',max=(n===2?44:30)*(1+.07*charm())*(1+.04*(S.star||0))*Math.max(.7,1-S.day*.02)*(vip?.75:1)*(ty==='kilat'?.6:1)*((EVT[G.ev]||{}).pat||1),seat=pick(free),el=document.createElement('div');
+ el.className='cust'+(vip?' vip':'')+(ty?' '+ty:'');el.innerHTML=`<div class="bub">${need.map(k=>`<span class="chip" data-k="${k}" onclick="serveTo(${G.id},'${k}')" title="Tap untuk menyajikan"><span>${px(R[k].e,28)}</span><small>${R[k].n.split(' ').pop()}</small></span>`).join('')}</div><div class="face"><img alt="" src="${sprite()}"><span class="mood">😊</span>${vip?'<span class="crown">👑</span>':ty==='kilat'?'<span class="crown">⚡</span>':ty==='krit'?'<span class="crown">🧐</span>':''}</div><div class="pat"><i></i></div>`;
  $('#seats').children[seat].appendChild(el);snd(520,.08,'sine');
- if(vip)toast('👑 Pelanggan VIP! Bayar 2x lipat');G.cs.push({id:G.id++,seat,vip,need,done:[],pat:max,max,el,m:'😊',bar:el.querySelector('.pat i'),mo:el.querySelector('.mood')})}
-const interval=()=>Math.max(2.6,7-S.day*.5-(S.rating-3)*.5)*rnd(.7,1.3)*(G.rush?.55:1);
+ if(vip)toast('👑 Pelanggan VIP! Bayar 2x lipat');G.cs.push({id:G.id++,seat,vip,ty,need,done:[],pat:max,max,el,m:'😊',bar:el.querySelector('.pat i'),mo:el.querySelector('.mood')})}
+const interval=()=>Math.max(2.6,7-S.day*.5-(S.rating-3)*.5)*rnd(.7,1.3)*(G.rush?.55:1)*((EVT[G.ev]||{}).spawn||1);
 
 /* ---------- main loop ---------- */
 let last=0;
@@ -307,26 +408,28 @@ function tick(dt){G.t+=dt;const p=Math.min(1,G.t/DAY);$('#scene').style.setPrope
  for(const c of [...G.cs]){c.pat-=dt;const r=c.pat/c.max;c.bar.style.width=Math.max(0,r*100)+'%';c.bar.className=r>.55?'':r>.28?'mid':'low';
   const m=r>.55?'😊':r>.28?'😐':'😠';if(m!==c.m){c.m=m;c.mo.textContent=m}
   if(c.pat<=0){c.mo.textContent='😡';G.combo=0;G.missed++;S.rating=Math.max(1,S.rating-.3);leave(c,false);snd(160,.25,'sawtooth');toast('Pelanggan pergi kecewa 💢');hud()}}
- if(G.brew){G.brew.t+=dt;$('#pg i').style.width=Math.min(100,G.brew.t/brewT()*100)+'%';
-  if(G.brew.t>=brewT()){G.tray.push(G.brew.k);G.brew=null;$('#pg i').style.width='0';snd(780,.12,'triangle');renderTray();renderCup()}}
+ if(asT()&&G.tray.length){G.asT+=dt;if(G.asT>=asT()){G.asT=0;for(let i=0;i<G.tray.length;i++){const k=G.tray[i];if(G.cs.some(c=>c.need.includes(k)&&!c.done.includes(k))){const b=$('#tray').children[i];serve(i,b);toast('🧑‍🍳 Asisten menyajikan '+R[k].n);break}}}}
+ if(bT()){G.bT=(G.bT||0)+dt;if(G.bT>=bT()){const i=[...Array(stN()).keys()].find(i=>!G.st[i]);if(i!==undefined){G.bT=0;const have=[...G.tray,...G.st.filter(Boolean).map(b=>b.k)];for(const k of G.cs.flatMap(c=>c.need.filter(x=>!c.done.includes(x)))){const j=have.indexOf(k);if(j>=0){have.splice(j,1);continue}S.money=Math.max(0,S.money-rcost(k));G.cost+=rcost(k);hud();G.st[i]={k,t:0};renderSt();toast('👨‍🍳 Barista meracik '+R[k].n);break}}}}
+ for(let i=0;i<stN();i++){const b=G.st[i];if(!b)continue;if(!b.rdy){b.t+=dt;const f=document.querySelector('#st'+i+' i');if(f)f.style.width=Math.min(100,b.t/brewT()*100)+'%';if(b.t>=brewT()){b.rdy=1;snd(780,.12,'triangle');renderSt()}}
+  if(b.rdy&&G.tray.length<slots()){G.tray.push(b.k);G.st[i]=null;renderTray();renderSt()}}
  if(G.closed&&!G.cs.length&&!G.over){G.over=true;endDay()}}
 
 /* ---------- day flow ---------- */
-function startDay(){closeModal();document.querySelectorAll('.cust').forEach(e=>e.remove());G=newG();G.goal=100+S.day*30;G.run=true;music();$('#scene').style.setProperty('--p',0);renderBar();hud();banner('☀️ Hari '+S.day+' dimulai!');snd(520,.1);setTimeout(()=>snd(780,.15),100)}
+function startDay(){closeModal();document.querySelectorAll('.cust').forEach(e=>e.remove());DAY=75+Math.min(45,(S.day-1)*3);G=newG();G.goal=Math.round((100+S.day*30)*(1+.25*(S.pres||0)));G.run=true;G.lv=rep();G.ev=S.day%7===0?'festival':S.day>=2&&Math.random()<.3?pick(['hujan','cerah']):null;$('#scene').classList.toggle('rain',G.ev==='hujan');music();$('#scene').style.setProperty('--p',0);renderBar();hud();banner(G.ev?EVT[G.ev].n:'☀️ Hari '+S.day+' dimulai!');snd(520,.1);setTimeout(()=>snd(780,.15),100)}
 function endDay(){G.run=false;const d=S.day;S.day++;S.rating=Math.max(1,S.rating);S.best=Math.max(S.best||0,G.earned);const hit=G.earned>=G.goal;if(hit)S.money+=40;if(!G.missed&&G.served>=8)S.perfect=true;checkAch();save();hud();cloudPush();
  const stars='⭐'.repeat(Math.round(S.rating))+'☆'.repeat(5-Math.round(S.rating));
  const tip=G.missed>G.served?'Terlalu banyak pelanggan kabur. Upgrade mesin & rak saji!':G.missed===0?'Sempurna! Tidak ada pelanggan kecewa 🎉':'Bagus! Coba jaga kombo biar bonusnya besar.';
- const v=()=>modal(`<h2>Hari ${d} selesai 🌙</h2><div class="stat"><span>Pendapatan</span><span>${fmt(G.earned)}</span></div><div class="stat"><span>Pelanggan dilayani</span><span>${G.served}</span></div><div class="stat"><span>Pelanggan kecewa</span><span>${G.missed}</span></div><div class="stat"><span>Target harian ${fmt(G.goal)}</span><span>${hit?'✅ +Rp40.000':'❌ belum'}</span></div><div class="stat"><span>Rating kafe</span><span>${stars}</span></div><p>${tip}</p><div class="row"><button class="btn sec" onclick="openShop(sum)">🛒 Toko</button><button class="btn sec" onclick="openLB(sum)">🏆 Peringkat</button><button class="btn" onclick="startDay()">Mulai Hari ${S.day}</button></div>`);
+ const v=()=>modal(`<h2>Hari ${d} selesai 🌙</h2><div class="stat"><span>Pendapatan</span><span>${fmt(G.earned)}</span></div><div class="stat"><span>Pelanggan dilayani</span><span>${G.served}</span></div><div class="stat"><span>Biaya bahan</span><span>-${fmt(G.cost||0)}</span></div><div class="stat"><span>Laba bersih</span><span>${fmt(G.earned-(G.cost||0))}</span></div><div class="stat"><span>Kombo terbaik</span><span>🔥 x${G.bestCombo}</span></div><div class="stat"><span>Pelanggan kecewa</span><span>${G.missed}</span></div><div class="stat"><span>Target harian ${fmt(G.goal)}</span><span>${hit?'✅ +Rp40.000':'❌ belum'}</span></div><div class="stat"><span>Rating kafe</span><span>${stars}</span></div><p>${tip}</p><div class="row"><button class="btn sec" onclick="openShop(sum)">🛒 Toko</button><button class="btn sec" onclick="openLB(sum)">🏆 Peringkat</button>${S.day>=10?'<button class="btn sec" onclick="openPres(sum)">✨ Prestise</button>':''}<button class="btn" onclick="startDay()">Mulai Hari ${S.day}</button></div>`);
  window.sum=v;v()}
 function showStart(){back=showStart;const first=S.day===1&&S.money===40;
- modal(`<h2>☕ Kedai Senja</h2><p>Layani pelanggan, racik pesanan, dan kembangkan kafe kecilmu di bawah langit senja.</p><div class="row"><button class="btn" onclick="startDay()">${first?'Mulai Hari 1':'Lanjut Hari '+S.day}</button></div><div class="row"><button class="btn sec sm" onclick="tutStart()">❓ Cara bermain</button><button class="btn sec sm" onclick="openShop(showStart)">🛒 Toko</button>${first?'':'<button class="btn sec sm" onclick="resetAll()">↺ Mulai ulang</button>'}</div>`)}
+ modal(`<h2>☕ Kedai Senja</h2><p>Layani pelanggan, racik pesanan, dan kembangkan kafe kecilmu di bawah langit senja.</p><div class="row"><button class="btn" onclick="startDay()">${first?'Mulai Hari 1':'Lanjut Hari '+S.day}</button></div><div class="row"><button class="btn sec sm" onclick="tutStart()">❓ Cara bermain</button><button class="btn sec sm" onclick="openShop(showStart)">🛒 Toko</button>${first?'':'<button class="btn sec sm" onclick="resetAll()">↺ Mulai ulang</button>'}</div><p class="cr">Crafted with ♥ by Farel Bayone Meijabar</p>`)}
 function resetAll(){if(confirm('Hapus semua progres dan mulai dari awal?')){localStorage.removeItem(KEY);location.reload()}}
 
 /* ---------- shop ---------- */
 let tab='dapur';
 function openShop(b,t){back=b||closeModal;tab=t||tab;
  modal(`<h2>🛒 Toko Upgrade</h2><div class="tabs"><button class="${tab==='dapur'?'on':''}" onclick="openShop(back,'dapur')">🍳 Dapur</button><button class="${tab==='dekor'?'on':''}" onclick="openShop(back,'dekor')">🌿 Dekorasi</button></div>
- <div class="grid">${UP.filter(u=>u.c===tab).map(u=>{const l=lvl(u.id),done=l>=u.cost.length;return `<div class="up"><div class="ue">${u.e}</div><b>${u.n}</b><small>${u.d}</small><div class="pips">${u.cost.map((_,i)=>`<i class="${i<l?'on':''}"></i>`).join('')}</div><button class="btn sm" ${done?'disabled':''} onclick="buy('${u.id}')">${done?'Maksimal ✓':fmt(u.cost[l])}</button></div>`}).join('')}</div>
+ <div class="grid">${UP.filter(u=>u.c===tab).map(u=>{const l=lvl(u.id),done=l>=u.cost.length;return `<div class="up"><div class="ue">${px(u.e,42)}</div><b>${u.n}</b><small>${u.d}</small><div class="pips">${u.cost.map((_,i)=>`<i class="${i<l?'on':''}"></i>`).join('')}</div><button class="btn sm" ${done?'disabled':''} onclick="buy('${u.id}')">${done?'Maksimal ✓':fmt(u.cost[l])}</button></div>`}).join('')}</div>
  <div class="row"><span class="st">💰 ${fmt(S.money)}</span><button class="btn" onclick="back()">Kembali</button></div>`,'wide')}
 function buy(id){const u=UP.find(x=>x.id===id),l=lvl(id),c=u.cost[l];if(S.money<c){snd(180,.2,'square');return toast('Uang belum cukup 😅')}
  S.money-=c;S.up[id]=l+1;save();chime();hud();renderBar();checkAch();openShop(back);toast(u.e+' '+u.n+' terpasang!')}
@@ -334,10 +437,11 @@ function buy(id){const u=UP.find(x=>x.id===id),l=lvl(id),c=u.cost[l];if(S.money<
 /* ---------- tutorial ---------- */
 const STEPS=[
  ['#scene','Selamat datang di Kedai Senja! Pelanggan akan duduk di kursi dan memesan lewat gelembung ucapan. Perhatikan bar kesabaran di bawahnya — kalau habis, mereka pergi.'],
- ['#book','Buku Resep: tiap minuman punya bahan tertentu. Tap sebuah resep untuk langsung mengisi cangkir.'],
- ['#ingr','Atau racik manual: tap bahan satu per satu (maks. 3). Shortcut keyboard: angka 1–7.'],
+ ['#book','Menu: tiap minuman punya bahan tertentu. Menu hanya daftar minuman, bahan, dan harga. Meracik selalu dimulai dari bahan di sebelahnya.'],
+ ['#ingr','Atau racik manual: tap bahan satu per satu (maks. 3). Shortcut keyboard: angka 1–9.'],
  ['#mix','Kalau resepnya benar, namanya muncul di sini. Tekan Racik! (atau Enter) dan tunggu progress bar penuh. Salah resep? Tekan 🗑️.'],
- ['#tray','Minuman jadi muncul di Rak Saji. Tap minuman — otomatis diberikan ke pelanggan yang memesannya. Yang paling sabar-hampir-habis dilayani duluan.'],
+ ['#stns','Stasiun Racik: tiap mesin meracik satu minuman. Beli stasiun tambahan di Toko untuk meracik beberapa minuman sekaligus.'],
+ ['#tray','Minuman jadi muncul di Meja Saji (bisa diperbesar di Toko). Tap minuman — otomatis diberikan ke pelanggan yang memesannya. Yang paling sabar-hampir-habis dilayani duluan.'],
  ['#tb','Bar waktu menunjukkan sisa hari dan 🎯 target pendapatan harian — capai untuk bonus Rp40.000. Pelanggan 👑 VIP membayar 2x lipat tapi kurang sabar.'],
  ['#hud','Layani cepat untuk tip & kombo 🔥. Rating ⭐ yang tinggi mengundang lebih banyak pelanggan, tetapi pelanggan kecewa menurunkannya.'],
  ['#bShop','Setelah hari berakhir, belanja di Toko: mesin lebih cepat, rak lebih besar, resep baru, dan dekorasi yang menambah kesabaran & tip. Selamat berjualan!']];
@@ -350,7 +454,8 @@ function tutShow(){document.querySelectorAll('.hl').forEach(e=>e.classList.remov
 function tutEnd(){document.querySelectorAll('.hl').forEach(e=>e.classList.remove('hl'));$('#tut').classList.remove('on');tutOn=false;S.seen=true;save();if(!G.run)showStart();else closeModal()}
 
 /* ---------- keyboard ---------- */
-addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&!tutOn){ovOpen?closeModal():menu();return}if(ovOpen||tutOn||!G.run)return;const n=+e.key;
+addEventListener('keydown',e=>{if(e.key==='Escape'&&G.run&&!tutOn){ovOpen?closeModal():menu();return}
+ if(e.target&&e.target.tagName==='BUTTON'&&e.key===' ')e.target.blur();if(ovOpen||tutOn||!G.run)return;const n=+e.key;
  if(n>=1&&n<=ikeys.length)addIng(ikeys[n-1]);else if(e.key==='Enter'||e.key===' '){e.preventDefault();brew()}else if(e.key==='Backspace')clearCup()});
 
 /* ---------- leaderboard: Supabase REST, no login ---------- */
@@ -370,12 +475,17 @@ async function saveName(){const v=$('#nm').value.trim().slice(0,16);if(!v)return
 /* ---------- menu, music, achievements, save code ---------- */
 let mi=null,ms=0;const NT=[261.6,329.6,392,523.3,392,329.6,293.7,349.2,440,587.3,440,349.2];
 function music(){clearInterval(mi);mi=null;if(S.mute||S.nomusic)return;mi=setInterval(()=>{if(ovOpen||tutOn||!G.run)return;snd(NT[ms++%NT.length]/2,.25,'square',.012);if(ms%4===0)snd(NT[0]/4,.3,'triangle',.02)},260)}
-function menu(){modal(`<h2>⚙️ Menu</h2><div class="row" style="flex-direction:column;align-items:stretch"><button class="btn" onclick="closeModal()">▶ Lanjutkan</button><button class="btn sec" onclick="toggleSnd();menu()">${S.mute?'🔇 Suara: mati':'🔊 Suara: nyala'}</button><button class="btn sec" onclick="S.nomusic=!S.nomusic;save();music();menu()">🎵 Musik: ${S.nomusic?'mati':'nyala'}</button><button class="btn sec" onclick="openAch()">🏅 Pencapaian</button><button class="btn sec" onclick="exportSave()">💾 Simpan / muat kode</button><button class="btn sec" onclick="tutStart()">❓ Cara bermain</button><button class="btn sec" onclick="resetAll()">↺ Mulai ulang</button></div>`)}
-const ACH=[['first','Pelanggan Pertama','🥤','Layani 1 pelanggan',()=>S.served>=1],['s50','Pelayan Handal','🧑‍🍳','Layani 50 pelanggan',()=>S.served>=50],['s200','Legenda Kedai','🏆','Layani 200 pelanggan',()=>S.served>=200],['c5','Kombo 5x','🔥','Capai kombo 5x',()=>S.maxCombo>=5],['c10','Kombo 10x','⚡','Capai kombo 10x',()=>S.maxCombo>=10],['rich','Juragan','💰','Total pendapatan Rp1.000.000',()=>S.total>=1000],['star','Bintang Lima','⭐','Rating 4,5 atau lebih',()=>S.rating>=4.5],['d5','Bertahan 5 Hari','📅','Selesaikan 5 hari',()=>S.day>=6],['d10','Veteran','🌇','Selesaikan 10 hari',()=>S.day>=11],['perfect','Hari Sempurna','✨','Tanpa pelanggan kecewa (min. 8 dilayani)',()=>S.perfect],['vip','Sahabat VIP','👑','Layani 5 pelanggan VIP',()=>S.vip>=5],['chef','Chef Lengkap','📖','Buka semua resep',()=>Object.keys(R).every(unlocked)],['deco','Kafe Impian','🌿','Pasang semua dekorasi',()=>charm()>=6]];
+function menu(){modal(`<h2>⚙️ Menu</h2><div class="row" style="flex-direction:column;align-items:stretch"><button class="btn" onclick="closeModal()">▶ Lanjutkan</button><button class="btn sec" onclick="toggleSnd();menu()">${S.mute?'🔇 Suara: mati':'🔊 Suara: nyala'}</button><button class="btn sec" onclick="S.nomusic=!S.nomusic;save();music();menu()">🎵 Musik: ${S.nomusic?'mati':'nyala'}</button><button class="btn sec" onclick="openAch()">🏅 Pencapaian</button><button class="btn sec" onclick="openPres()">✨ Prestise</button><button class="btn sec" onclick="exportSave()">💾 Simpan / muat kode</button><button class="btn sec" onclick="tutStart()">❓ Cara bermain</button><button class="btn sec" onclick="resetAll()">↺ Mulai ulang</button></div>`)}
+const ACH=[['first','Pelanggan Pertama','🥤','Layani 1 pelanggan',()=>S.served>=1],['s50','Pelayan Handal','🧑‍🍳','Layani 50 pelanggan',()=>S.served>=50],['s200','Legenda Kedai','🏆','Layani 200 pelanggan',()=>S.served>=200],['c5','Kombo 5x','🔥','Capai kombo 5x',()=>S.maxCombo>=5],['c10','Kombo 10x','⚡','Capai kombo 10x',()=>S.maxCombo>=10],['rich','Juragan','💰','Total pendapatan Rp1.000.000',()=>S.total>=1000],['star','Bintang Lima','⭐','Rating 4,5 atau lebih',()=>S.rating>=4.5],['d5','Bertahan 5 Hari','📅','Selesaikan 5 hari',()=>S.day>=6],['d10','Veteran','🌇','Selesaikan 10 hari',()=>S.day>=11],['perfect','Hari Sempurna','✨','Tanpa pelanggan kecewa (min. 8 dilayani)',()=>S.perfect],['vip','Sahabat VIP','👑','Layani 5 pelanggan VIP',()=>S.vip>=5],['chef','Chef Lengkap','📖','Buka semua resep',()=>Object.keys(R).every(unlocked)],['pres','Warisan Kedai','✨','Buka cabang baru (prestise)',()=>S.pres>=1],['deco','Kafe Impian','🌿','Pasang semua dekorasi',()=>charm()>=6]];
 function checkAch(){S.ach=S.ach||{};for(const a of ACH)if(!S.ach[a[0]]&&a[4]()){S.ach[a[0]]=1;save();toast('🏅 '+a[1]+'!');setTimeout(chime,200)}}
 function openAch(){S.ach=S.ach||{};const n=ACH.filter(a=>S.ach[a[0]]).length;modal(`<h2>🏅 Pencapaian</h2><p>${n} / ${ACH.length} terbuka</p><div class="grid">${ACH.map(a=>`<div class="up" style="${S.ach[a[0]]?'':'opacity:.4;filter:grayscale(1)'}"><div class="ue">${a[2]}</div><b>${a[1]}</b><small>${a[3]}</small></div>`).join('')}</div><div class="row"><button class="btn" onclick="menu()">Kembali</button></div>`,'wide')}
+function openPres(b){back=b||menu;const g=Math.floor(S.day/5),ok=S.day>=10;
+ modal(`<h2>✨ Warisan Kedai</h2><p>Buka cabang baru: hari, uang, dan upgrade direset, tapi kamu mendapat <b>Bintang Kedai</b> permanen (+3% harga, +4% kesabaran, +Rp1k tip per bintang). Level kafe dan pencapaian tetap. Setiap cabang baru menaikkan target harian 25%.</p><div class="stat"><span>Bintang saat ini</span><span>✨ ${S.star||0}</span></div><div class="stat"><span>Cabang dibuka</span><span>${S.pres||0}</span></div><div class="stat"><span>Hari sekarang (min. 10)</span><span>${S.day}</span></div><div class="stat"><span>Bintang yang didapat</span><span>${ok?'+'+g:'—'}</span></div><div class="row"><button class="btn" ${ok?'':'disabled'} onclick="prestige()">✨ Buka Cabang Baru</button><button class="btn sec" onclick="back()">Kembali</button></div>`)}
+function prestige(){if(S.day<10)return;const g=Math.floor(S.day/5);if(!confirm('Buka cabang baru? Hari, uang, dan upgrade direset. Kamu dapat +'+g+' ✨ Bintang Kedai permanen.'))return;
+ const k={name:S.name,pid:S.pid,sec:S.sec,seen:true,mute:S.mute,nomusic:S.nomusic,ach:S.ach,total:S.total,best:S.best,maxCombo:S.maxCombo,served:S.served,vip:S.vip,perfect:S.perfect,star:(S.star||0)+g,pres:(S.pres||0)+1};
+ S={money:40+20*k.star,day:1,rating:3,up:{},...k};save();cloudPush().finally(()=>location.reload())}
 function exportSave(){const c=btoa(unescape(encodeURIComponent(JSON.stringify(S))));modal(`<h2>💾 Simpan / Muat</h2><p>Salin kode ini untuk memindahkan progres ke perangkat lain, atau tempel kode lalu tekan Muat.</p><textarea id="sv" rows="5" style="width:100%;background:var(--bg);color:var(--tx);border:3px solid var(--ol);padding:8px;font:.75rem monospace">${c}</textarea><div class="row"><button class="btn sm" onclick="navigator.clipboard&&navigator.clipboard.writeText($('#sv').value);toast('Disalin 📋')">Salin</button><button class="btn sm" onclick="importSave()">Muat kode</button><button class="btn sec sm" onclick="menu()">Kembali</button></div>`)}
-function importSave(){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#sv').value.trim()))));if(typeof o.day!=='number'||typeof o.money!=='number')throw 0;Object.assign(S,o);save();location.reload()}catch(e){toast('Kode tidak valid ❌')}}
+function importSave(){try{const o=JSON.parse(decodeURIComponent(escape(atob($('#sv').value.trim()))));if(typeof o.day!=='number'||typeof o.money!=='number')throw 0;if(!o.up||typeof o.up!=='object')o.up={};Object.assign(S,o);save();location.reload()}catch(e){toast('Kode tidak valid ❌')}}
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&G.run&&!ovOpen&&!tutOn)menu()});
 if('serviceWorker' in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
 

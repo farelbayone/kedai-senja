@@ -1,5 +1,7 @@
 # ☕ Kedai Senja — A Cozy Cafe Manager Game
 
+*Crafted with ♥ by **Farel Bayone Meijabar***
+
 > Serve customers, craft their orders, and grow your little cafe under a drifting sunset sky.
 
 **Kedai Senja** ("Sunset Café") is a fast, cozy cafe-management game. The frontend is a single static HTML file hosted on **GitHub Pages**, and an optional **Supabase** backend adds a global leaderboard (no login required) — a full-stack game with zero servers to maintain.
@@ -9,7 +11,8 @@
 - **Real-time service loop** — customers arrive, order, and lose patience. Be quick, be accurate.
 - **Hands-on drink crafting** — pick ingredients, brew, then serve. Wrong recipe? The ingredients are wasted.
 - **Combo & tip system** — chain happy customers for streak bonuses and better tips.
-- **Kitchen upgrades** — faster espresso machine, bigger serving rack, extra seats, and new recipes (Iced Milk Coffee, Hot Chocolate, Toast).
+- **Kitchen upgrades** — faster espresso machine, bigger serving rack, extra seats, an **Assistant Barista** 🧑‍🍳 who auto-serves ready drinks, and new recipes (Iced Milk Coffee, Hot Chocolate, Toast, Iced Sweet Tea, Milk Tea, Mocha).
+- **Daily weather events** — rainy days bring more customers and bigger tips; clear days make everyone more patient.
 - **Decorations** — plants, lamps, posters, an aquarium, a piano, and a cafe cat. Each one makes customers more patient and generous, and appears in your cafe.
 - **Daily goals** — hit the daily revenue target for a cash bonus; **VIP customers** 👑 pay double but are less patient.
 - **13 achievements** — from *First Customer* to *Dream Cafe*.
@@ -26,8 +29,9 @@
 ## 🎮 How to Play
 
 1. **Watch the seats.** Each customer shows an order bubble (e.g. 🥤) and a patience bar. If the bar empties, they leave and your rating drops.
-2. **Pick ingredients.** Tap ingredients to fill the cup (max 3), or tap a recipe in the Recipe Book to auto-fill it.
-3. **Brew.** When the cup matches a recipe, its name appears. Press **Brew** and wait for the progress bar.
+2. **Pick ingredients.** Tap ingredients to fill the cup (max 3). The Recipe Book is a cheat sheet only — tap a recipe to highlight its ingredients, but you still craft by hand.
+3. **Brew** (buy extra **Stasiun Racik** in the shop to brew several drinks at once).
+    When the cup matches a recipe, its name appears. Press **Brew** and wait for the progress bar.
 4. **Serve.** Finished drinks appear in the serving rack. Tap one to hand it to the customer who ordered it (the most impatient one is served first).
 5. **Earn & upgrade.** After each day, spend your money in the 🛒 Shop on kitchen upgrades and decorations.
 
@@ -39,7 +43,9 @@
 | Milk Coffee 🥤 | Coffee + Milk | Rp18k |
 | Sweet Tea 🍵 | Tea + Sugar | Rp14k |
 
-Unlockable in the shop: Iced Milk Coffee 🧋 (Coffee + Milk + Ice), Hot Chocolate 🍫 (Milk + Chocolate), Toast 🍞 (Bread).
+Unlockable in the shop: Iced Milk Coffee 🧋 (Coffee + Milk + Ice), Hot Chocolate 🍫 (Milk + Chocolate), Toast 🍞 (Bread), Iced Sweet Tea 🧊 (Tea + Sugar + Ice), Milk Tea 🫖 (Tea + Milk + Sugar), Mocha 🍨 (Coffee + Milk + Chocolate), Honey Toast 🥞, Cheese Toast 🥪, Honey Latte 🍼, Special Toast 🥐 (Bread + Cheese + Honey).
+
+The in-game **Menu** is display-only — every drink is crafted ingredient → cup → Brew. Customers come as Regular, VIP 👑, Rush ⚡ (impatient, pays +50%) or Critic 🧐 (rates your service). Hire a **Barista** 👨‍🍳 to auto-brew and an **Assistant** 🧑‍🍳 to auto-serve.
 
 ### Tips
 
@@ -53,11 +59,22 @@ Unlockable in the shop: Iced Milk Coffee 🧋 (Coffee + Milk + Ice), Hot Chocola
 
 | Input | Action |
 |---|---|
-| `1`–`7` | Add ingredient |
+| `1`–`9` | Add ingredient |
 | `Enter` / `Space` | Brew |
 | `Backspace` | Clear cup |
 | `Esc` | Pause / menu |
 | Mouse / Touch | Everything else |
+
+## 🆕 Economy & Progression
+
+- **Ingredient costs** — every ingredient costs money (Rp1–3k); wrong brews waste it, emptying the cup refunds it. The day summary shows ingredient cost and **net profit**.
+- **Cafe level (Lv)** — grows with lifetime earnings and gives a permanent tip bonus.
+- **Festival Day** every 7th day; days get longer as you progress (75s → 120s).
+- **Staff are visible** in the cafe (Barista 👨‍🍳, Assistant 🧑‍🍳); auto-brewing also pays for ingredients. A hanging lamp appears after buying one.
+
+## ✨ Prestige (Warisan Kedai)
+
+From Day 10 you can open a **new branch** (⚙️ Menu → ✨ Prestise): day, money and upgrades reset, but you keep cafe level, achievements and earn permanent **Kedai Stars** (+3% price, +4% patience, +Rp1k tip each). Every new branch raises the daily goal by 25%, so the game is endless. All icons are hand-drawn pixel sprites (`SP` in `index.html`).
 
 ## 🏗️ Architecture
 
